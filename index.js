@@ -12,8 +12,15 @@ if (![10.5, 10.4, 10.3, 10.2, 10.1].includes(mariadbVersion)) {
 }
 
 if (process.platform == 'darwin') {
+  // install
   run(`brew install mariadb@${mariadbVersion}`);
-  run('mysql.server start');
+
+  // start
+  const bin = `/usr/local/opt/mariadb@${mariadbVersion}/bin`;
+  run(`${bin}/mysql.server start`);
+
+  // set path
+  run(`echo "${bin}" >> $GITHUB_PATH`);
 } else {
   run(`sudo apt install mariadb-server-10.3`);
   run(`sudo systemctl start mariadb`);
