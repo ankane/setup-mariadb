@@ -7,7 +7,7 @@ function run(command) {
 
 const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || 10.5);
 
-if (![8].includes(mariadbVersion)) {
+if (![10.5, 10.4, 10.3, 10.2, 10.1].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
