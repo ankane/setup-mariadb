@@ -42,6 +42,8 @@ Test against multiple versions
         mariadb-version: ${{ matrix.mariadb-version }}
 ```
 
+## Extra Steps
+
 Create a database
 
 ```yml
