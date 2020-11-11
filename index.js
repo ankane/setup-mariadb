@@ -22,13 +22,11 @@ if (process.platform == 'darwin') {
   // set path
   run(`echo "${bin}" >> $GITHUB_PATH`);
 } else {
-  run(`ls /etc/apt/sources.list.d`);
-
   // install
   run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);
-  run(`sudo add-apt-repository "deb [arch=amd64,arm64,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.3/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main"`)
+  run(`sudo add-apt-repository "deb [arch=amd64,arm64,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/${mariadbVersion}/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main"`)
   run(`sudo apt-get update`);
-  run(`sudo apt-get install mariadb-server`);
+  run(`sudo apt-get install mariadb-server-${mariadbVersion}`);
 
   // start
   run(`sudo systemctl start mariadb`);
