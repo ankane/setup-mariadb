@@ -13,7 +13,7 @@ if (![8].includes(mariadbVersion)) {
 
 if (process.platform == 'darwin') {
   run('brew install mariadb');
-  run('mariadb.server start');
+  run('mysql.server start');
 } else {
   run('sudo service mariadb start');
   run(`sudo mariadbadmin -proot password ''`);
