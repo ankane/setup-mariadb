@@ -15,9 +15,9 @@ if (process.platform == 'darwin') {
   run('brew install mariadb');
   run('mysql.server start');
 } else {
-  run('sudo service mariadb start');
-  run(`sudo mariadbadmin -proot password ''`);
-  run(`sudo mariadb -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY ''"`);
-  run(`sudo mariadb -e "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'localhost'"`);
-  run(`sudo mariadb -e "FLUSH PRIVILEGES"`);
+  run('sudo systemctl start mariadb');
+  run(`sudo mysqladmin -proot password ''`);
+  run(`sudo mysql -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY ''"`);
+  run(`sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'localhost'"`);
+  run(`sudo mysql -e "FLUSH PRIVILEGES"`);
 }
