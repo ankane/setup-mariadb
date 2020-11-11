@@ -1,6 +1,6 @@
 # setup-mariadb
 
-The missing action for MariaDB - no need to use containers :tada:
+The missing action for MariaDB - no need for containers :tada:
 
 Supports Linux and Mac, and many versions
 
@@ -19,18 +19,12 @@ Version | `ubuntu-20.04` | `ubuntu-18.04` | `ubuntu-16.04` | `macos-10.15`
 Add it as a step to your workflow
 
 ```yml
-jobs:
-  build:
-    steps:
     - uses: ankane/setup-mariadb@v1
 ```
 
 Specify a version (defaults to the latest if no version is specified)
 
 ```yml
-jobs:
-  build:
-    steps:
     - uses: ankane/setup-mariadb@v1
       with:
         mariadb-version: 10.5
@@ -39,8 +33,6 @@ jobs:
 Test against multiple versions
 
 ```yml
-jobs:
-  build:
     strategy:
       matrix:
         mariadb-version: [10.5, 10.4, 10.3, 10.2, 10.1]
@@ -48,6 +40,18 @@ jobs:
     - uses: ankane/setup-mariadb@v1
       with:
         mariadb-version: ${{ matrix.mariadb-version }}
+```
+
+Create a database
+
+```yml
+    - run: mysqladmin create testdb
+```
+
+Run queries
+
+```yml
+    - run: mysql -D testdb -e 'SELECT VERSION()'
 ```
 
 ## Related Actions

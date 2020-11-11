@@ -37,5 +37,5 @@ jobs:
       with:
         mariadb-version: ${{ matrix.mariadb-version }}
     - run: |
-        mysqladmin create setup_mariadb_test
-        mysql -D setup_mariadb_test -e 'SELECT VERSION()'
+        mysqladmin create testdb
+        mysql -D testdb -e 'SELECT VERSION()'
