@@ -22,8 +22,18 @@ if (process.platform == 'darwin') {
   // set path
   run(`echo "${bin}" >> $GITHUB_PATH`);
 } else {
-  run(`sudo apt install mariadb-server-10.3`);
+  run(`ls /etc/apt/sources.list.d`);
+
+  // install
+  run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);
+  run(`sudo add-apt-repository "deb [arch=amd64,arm64,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.3/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main"`)
+  run(`sudo apt-get update`);
+  run(`sudo apt-get install mariadb-server`);
+
+  // start
   run(`sudo systemctl start mariadb`);
+
+  // add user
   run(`sudo mysqladmin -proot password ''`);
   run(`sudo mysql -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY ''"`);
   run(`sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'localhost'"`);
