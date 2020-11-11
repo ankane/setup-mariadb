@@ -31,8 +31,10 @@ if (process.platform == 'darwin') {
   // start
   run(`sudo systemctl start mariadb`);
 
-  // add user
+  // remove root password
   run(`sudo mysqladmin -proot password ''`);
+
+  // add user
   run(`sudo mysql -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY ''"`);
   run(`sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'localhost'"`);
   run(`sudo mysql -e "FLUSH PRIVILEGES"`);
