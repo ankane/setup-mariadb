@@ -1,0 +1,7 @@
+name: Setup MariaDB
+inputs:
+  mariadb-version:
+    description: The MariaDB version to download (if necessary) and use
+runs:
+  using: node12
+  main: index.js

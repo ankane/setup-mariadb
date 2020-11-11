@@ -1,0 +1,18 @@
+name: build
+on: [push, pull_request]
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, ubuntu-18.04, ubuntu-16.04, macos-10.15]
+        mariadb-version: [8]
+    steps:
+    - uses: ankane/setup-mariadb@v1
+      with:
+        mariadb-version: ${{ matrix.mariadb-version }}
+    - run: |
+        mariadbadmin create setup_mariadb_test
+        mariadb -D setup_mariadb_test -e 'SELECT 1 AS hello'
