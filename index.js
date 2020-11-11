@@ -15,7 +15,7 @@ if (process.platform == 'darwin') {
   run('brew install mariadb');
   run('mysql.server start');
 } else {
-  run(`sudo apt install mariadb-server-${mariadbVersion}`);
+  run(`sudo apt install mariadb-server-10.3`);
   run(`sudo systemctl start mariadb`);
   run(`sudo mysqladmin -proot password ''`);
   run(`sudo mysql -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY ''"`);
