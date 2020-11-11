@@ -50,6 +50,7 @@ jobs:
 - [setup-mysql](https://github.com/ankane/setup-mysql)
 - [setup-postgres](https://github.com/ankane/setup-postgres)
 - [setup-mongodb](https://github.com/ankane/setup-mongodb)
+- [setup-elasticsearch](https://github.com/ankane/setup-elasticsearch)
 
 ## Contributing
 
