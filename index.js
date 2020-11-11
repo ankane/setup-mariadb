@@ -23,11 +23,11 @@ if (process.platform == 'darwin') {
   run(`echo "${bin}" >> $GITHUB_PATH`);
 } else {
   // install
-  // run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);
-  // run(`sudo add-apt-repository "deb [arch=amd64,arm64,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/${mariadbVersion}/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main"`)
-  // run(`sudo apt-get update`);
-  run(`curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version="mariadb-${mariadbVersion}" --skip-maxscale --skip-tools`);
-  run(`cat /etc/apt/sources.list.d/mariadb.list`);
+  run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);
+  run(`echo "deb http://downloads.mariadb.com/MariaDB/mariadb-${mariadbVersion}/repo/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/mariadb.list`);
+  // run(`curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version="mariadb-${mariadbVersion}" --skip-maxscale --skip-tools`);
+  // run(`cat /etc/apt/sources.list.d/mariadb.list`);
+  run(`sudo apt-get update`);
   run(`sudo apt-get install mariadb-server-${mariadbVersion}`);
 
   // start
