@@ -15,4 +15,4 @@ jobs:
         mariadb-version: ${{ matrix.mariadb-version }}
     - run: |
         mysqladmin create setup_mariadb_test
-        mysql -D setup_mariadb_test -e 'SELECT 1 AS hello'
+        mysql -D setup_mariadb_test -e 'SELECT VERSION()'
