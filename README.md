@@ -2,10 +2,15 @@
 
 The missing action for MariaDB - no need to use containers :tada:
 
-Supports:
+Supports Linux and Mac, and many versions
 
-- Linux and Mac (`ubuntu-20.04`, `ubuntu-18.04`, `ubuntu-16.04`, and `macos-10.15`)
-- Many versions (`10.5`, `10.4`, `10.3`, `10.2`, and `10.1`)
+Version | `ubuntu-20.04` | `ubuntu-18.04` | `ubuntu-16.04` | `macos-10.15`
+--- | --- | --- | --- | ---
+`10.5` | ✓ | ✓ | ✓ | ✓
+`10.4` | | ✓ | ✓ | ✓
+`10.3` | | ✓ | ✓ |
+`10.2` | | ✓ | ✓ |
+`10.1` | | | | ✓
 
 [![Build Status](https://github.com/ankane/setup-mariadb/workflows/build/badge.svg?branch=v1)](https://github.com/ankane/setup-mariadb/actions)
 
