@@ -27,6 +27,7 @@ if (process.platform == 'darwin') {
   // set path
   run(`echo "${bin}" >> $GITHUB_PATH`);
 } else if (process.platform == 'win32') {
+  // install
   const versionMap = {
     '10.5': '10.5.8',
     '10.4': '10.4.17',
@@ -35,7 +36,6 @@ if (process.platform == 'darwin') {
     '10.1': '10.1.48'
   };
   const fullVersion = versionMap[mariadbVersion];
-  // install
   run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
   run(`msiexec /i mariadb.msi SERVICENAME=MariaDB /qn`);
 
