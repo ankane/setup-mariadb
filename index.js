@@ -1,8 +1,13 @@
 const execSync = require("child_process").execSync;
+const fs = require('fs');
 
 function run(command) {
   console.log(command);
   execSync(command, {stdio: 'inherit'});
+}
+
+function addToPath(newPath) {
+  fs.appendFileSync(process.env.GITHUB_PATH, `${newPath}\n`);
 }
 
 const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || 10.5);
@@ -21,6 +26,25 @@ if (process.platform == 'darwin') {
 
   // set path
   run(`echo "${bin}" >> $GITHUB_PATH`);
+} else if (process.platform == 'win32') {
+  const versionMap = {
+    '10.5': '10.5.8',
+    '10.4': '10.4.17',
+    '10.3': '10.3.27',
+    '10.2': '10.2.36',
+    '10.1': '10.1.48'
+  };
+  const fullVersion = versionMap[mariadbVersion];
+  // install
+  run(`curl -s -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
+  run(`msiexec /i mariadb.msi SERVICENAME=MariaDB /qn`);
+
+  addToPath(`C:\\Program Files\\MariaDB ${mariadbVersion}\\bin`);
+
+  // add user
+  run(`mysql -u root -e "CREATE USER 'runneradmin'@'localhost' IDENTIFIED BY ''"`);
+  run(`mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'runneradmin'@'localhost'"`);
+  run(`mysql -u root -e "FLUSH PRIVILEGES"`);
 } else {
   // install
   run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);

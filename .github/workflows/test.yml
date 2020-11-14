@@ -32,10 +32,20 @@ jobs:
             mariadb-version: 10.4
           - os: macos-10.15
             mariadb-version: 10.1
+          - os: windows-2019
+            mariadb-version: 10.5
+          - os: windows-2019
+            mariadb-version: 10.4
+          - os: windows-2019
+            mariadb-version: 10.3
+          - os: windows-2019
+            mariadb-version: 10.2
+          - os: windows-2019
+            mariadb-version: 10.1
     steps:
     - uses: ankane/setup-mariadb@v1
       with:
         mariadb-version: ${{ matrix.mariadb-version }}
-    - run: |
-        mysqladmin create testdb
-        mysql -D testdb -e 'SELECT VERSION()'
+    - run: mysql --version
+    - run: mysqladmin create testdb
+    - run: mysql -D testdb -e 'SELECT VERSION()'
