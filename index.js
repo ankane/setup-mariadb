@@ -36,7 +36,7 @@ if (process.platform == 'darwin') {
   };
   const fullVersion = versionMap[mariadbVersion];
   // install
-  run(`curl -s -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
+  run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
   run(`msiexec /i mariadb.msi SERVICENAME=MariaDB /qn`);
 
   addToPath(`C:\\Program Files\\MariaDB ${mariadbVersion}\\bin`);
