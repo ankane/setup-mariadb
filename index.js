@@ -10,9 +10,9 @@ function addToPath(newPath) {
   fs.appendFileSync(process.env.GITHUB_PATH, `${newPath}\n`);
 }
 
-const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || 10.5);
+const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || '10.5').toFixed(1);
 
-if (![10.5, 10.4, 10.3, 10.2, 10.1].includes(mariadbVersion)) {
+if (!['10.5', '10.4', '10.3', '10.2', '10.1'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
@@ -24,8 +24,13 @@ if (process.platform == 'darwin') {
   const bin = `/usr/local/opt/mariadb@${mariadbVersion}/bin`;
   run(`${bin}/mysql.server start`);
 
-  // set path
-  run(`echo "${bin}" >> $GITHUB_PATH`);
+  addToPath(bin);
+
+  // add permissions
+  if (mariadbVersion == '10.3' || mariadbVersion == '10.2') {
+    run(`${bin}/mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO ''@'localhost'"`);
+    run(`${bin}/mysql -u root -e "FLUSH PRIVILEGES"`);
+  }
 } else if (process.platform == 'win32') {
   // install
   const versionMap = {
