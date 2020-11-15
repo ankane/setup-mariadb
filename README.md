@@ -35,6 +35,7 @@ Version | `10.5` | `10.4` | `10.3` | `10.2` | `10.1`
 `ubuntu-16.04` | ✓ | ✓ | ✓ | ✓ |
 `macos-10.15` | ✓ | ✓ | ✓ | ✓ | ✓
 `windows-2019` | ✓ | ✓ | ✓ | ✓ | ✓
+`windows-2016` | ✓ | ✓ | ✓ | ✓ | ✓
 
 Test against multiple versions
 
