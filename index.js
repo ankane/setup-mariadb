@@ -1,5 +1,8 @@
 const execSync = require("child_process").execSync;
 const fs = require('fs');
+const os = require('os');
+const path = require('path');
+const process = require('process');
 
 function run(command) {
   console.log(command);
@@ -33,6 +36,8 @@ if (process.platform == 'darwin') {
   }
 } else if (process.platform == 'win32') {
   // install
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
+  process.chdir(tmpDir);
   const versionMap = {
     '10.5': '10.5.8',
     '10.4': '10.4.17',
