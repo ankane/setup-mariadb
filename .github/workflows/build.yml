@@ -71,6 +71,9 @@ jobs:
       with:
         mariadb-version: ${{ matrix.mariadb-version }}
     - run: mysql --version
+    - run: mysql -e 'SELECT VERSION()'
+    - run: mysql -e 'SELECT CURRENT_USER()'
+    - run: mysql -e 'SELECT DATABASE()'
+    - run: mysql -e "SHOW VARIABLES LIKE 'socket'"
     - run: mysqladmin create testdb
     - run: mysql -D testdb -e 'SELECT VERSION()'
-    - run: mysql -e "SHOW VARIABLES LIKE 'socket'"
