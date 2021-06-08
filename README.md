@@ -50,13 +50,17 @@ Test against multiple versions
         mariadb-version: ${{ matrix.mariadb-version }}
 ```
 
-## Extra Steps
+## Options
 
 Create a database
 
 ```yml
-    - run: mysqladmin create testdb
+    - uses: ankane/setup-mariadb@v1
+      with:
+        database: testdb
 ```
+
+## Extra Steps
 
 Run queries
 

@@ -3,12 +3,24 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const process = require('process');
+const spawnSync = require('child_process').spawnSync;
 
 function run(command) {
   console.log(command);
   let env = Object.assign({}, process.env);
   delete env.CI; // for Homebrew
   execSync(command, {stdio: 'inherit', env: env});
+}
+
+function runSafe() {
+  const args = Array.from(arguments);
+  console.log(args.join(' '));
+  const command = args.shift();
+  // spawn is safer and more lightweight than exec
+  const ret = spawnSync(command, args, {stdio: 'inherit'});
+  if (ret.status !== 0) {
+    throw ret.error;
+  }
 }
 
 function addToPath(newPath) {
@@ -21,12 +33,16 @@ if (!['10.5', '10.4', '10.3', '10.2', '10.1'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
+const database = process.env['INPUT_DATABASE'];
+
+let bin;
+
 if (process.platform == 'darwin') {
   // install
   run(`brew install mariadb@${mariadbVersion}`);
 
   // start
-  const bin = `/usr/local/opt/mariadb@${mariadbVersion}/bin`;
+  bin = `/usr/local/opt/mariadb@${mariadbVersion}/bin`;
   run(`${bin}/mysql.server start`);
 
   addToPath(bin);
@@ -51,12 +67,13 @@ if (process.platform == 'darwin') {
   run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
   run(`msiexec /i mariadb.msi SERVICENAME=MariaDB /qn`);
 
-  addToPath(`C:\\Program Files\\MariaDB ${mariadbVersion}\\bin`);
+  bin = `C:\\Program Files\\MariaDB ${mariadbVersion}\\bin`;
+  addToPath(bin);
 
   // add user
-  run(`mysql -u root -e "CREATE USER 'runneradmin'@'localhost' IDENTIFIED BY ''"`);
-  run(`mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'runneradmin'@'localhost'"`);
-  run(`mysql -u root -e "FLUSH PRIVILEGES"`);
+  run(`"${bin}\\mysql" -u root -e "CREATE USER 'runneradmin'@'localhost' IDENTIFIED BY ''"`);
+  run(`"${bin}\\mysql" -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'runneradmin'@'localhost'"`);
+  run(`"${bin}\\mysql" -u root -e "FLUSH PRIVILEGES"`);
 } else {
   // install
   run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);
@@ -74,4 +91,11 @@ if (process.platform == 'darwin') {
   run(`sudo mysql -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY ''"`);
   run(`sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'localhost'"`);
   run(`sudo mysql -e "FLUSH PRIVILEGES"`);
+
+
+  bin = `/usr/bin`;
+}
+
+if (database) {
+  runSafe(path.join(bin, 'mysqladmin'), 'create', database);
 }
