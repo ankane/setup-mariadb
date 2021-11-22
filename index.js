@@ -27,9 +27,9 @@ function addToPath(newPath) {
   fs.appendFileSync(process.env.GITHUB_PATH, `${newPath}\n`);
 }
 
-const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || '10.5').toFixed(1);
+const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || '10.6').toFixed(1);
 
-if (!['10.5', '10.4', '10.3', '10.2', '10.1'].includes(mariadbVersion)) {
+if (!['10.6', '10.5', '10.4', '10.3', '10.2', '10.1'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
@@ -57,10 +57,11 @@ if (process.platform == 'darwin') {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
   process.chdir(tmpDir);
   const versionMap = {
-    '10.5': '10.5.8',
-    '10.4': '10.4.17',
-    '10.3': '10.3.27',
-    '10.2': '10.2.36',
+    '10.6': '10.6.5',
+    '10.5': '10.5.13',
+    '10.4': '10.4.22',
+    '10.3': '10.3.32',
+    '10.2': '10.2.41',
     '10.1': '10.1.48'
   };
   const fullVersion = versionMap[mariadbVersion];
