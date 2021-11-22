@@ -18,14 +18,6 @@ jobs:
             mariadb-version: 10.3
           - os: ubuntu-18.04
             mariadb-version: 10.2
-          - os: ubuntu-16.04
-            mariadb-version: 10.5
-          - os: ubuntu-16.04
-            mariadb-version: 10.4
-          - os: ubuntu-16.04
-            mariadb-version: 10.3
-          - os: ubuntu-16.04
-            mariadb-version: 10.2
           - os: macos-11.0
             mariadb-version: 10.5
           - os: macos-11.0
