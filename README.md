@@ -28,14 +28,14 @@ Specify a version (defaults to the latest)
 
 Currently supports
 
-Version | `10.5` | `10.4` | `10.3` | `10.2`
+Version | `10.6` | `10.5` | `10.4` | `10.3` | `10.2`
 --- | --- | --- | --- | --- | ---
-`ubuntu-20.04` | ✓ | | |
-`ubuntu-18.04` | ✓ | ✓ | ✓
-`macos-11.0` | ✓ | ✓ | ✓ | ✓
-`macos-10.15` | ✓ | ✓ | ✓ | ✓
-`windows-2019` | ✓ | ✓ | ✓ | ✓
-`windows-2016` | ✓ | ✓ | ✓ | ✓
+`ubuntu-20.04` | ✓ | ✓ | | |
+`ubuntu-18.04` | ✓ | ✓ | ✓ | ✓
+`macos-11.0` | ✓ | ✓ | ✓ | ✓ | ✓
+`macos-10.15` | ✓ | ✓ | ✓ | ✓ | ✓
+`windows-2019` | ✓ | ✓ | ✓ | ✓ | ✓
+`windows-2016` | ✓ | ✓ | ✓ | ✓ | ✓
 
 Test against multiple versions
 
