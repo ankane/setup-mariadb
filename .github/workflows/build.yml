@@ -26,8 +26,6 @@ jobs:
             mariadb-version: 10.3
           - os: macos-11.0
             mariadb-version: 10.2
-          - os: macos-11.0
-            mariadb-version: 10.1
           - os: macos-10.15
             mariadb-version: 10.5
           - os: macos-10.15
@@ -36,8 +34,6 @@ jobs:
             mariadb-version: 10.3
           - os: macos-10.15
             mariadb-version: 10.2
-          - os: macos-10.15
-            mariadb-version: 10.1
           - os: windows-2019
             mariadb-version: 10.5
           - os: windows-2019
@@ -46,8 +42,6 @@ jobs:
             mariadb-version: 10.3
           - os: windows-2019
             mariadb-version: 10.2
-          - os: windows-2019
-            mariadb-version: 10.1
           - os: windows-2016
             mariadb-version: 10.5
           - os: windows-2016
@@ -56,8 +50,6 @@ jobs:
             mariadb-version: 10.3
           - os: windows-2016
             mariadb-version: 10.2
-          - os: windows-2016
-            mariadb-version: 10.1
     steps:
     - uses: actions/checkout@v2
     - uses: ./.

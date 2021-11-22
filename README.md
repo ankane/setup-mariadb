@@ -28,21 +28,21 @@ Specify a version (defaults to the latest)
 
 Currently supports
 
-Version | `10.5` | `10.4` | `10.3` | `10.2` | `10.1`
+Version | `10.5` | `10.4` | `10.3` | `10.2`
 --- | --- | --- | --- | --- | ---
-`ubuntu-20.04` | ✓ | | | |
-`ubuntu-18.04` | ✓ | ✓ | ✓ | ✓ |
-`macos-11.0` | ✓ | ✓ | ✓ | ✓ | ✓
-`macos-10.15` | ✓ | ✓ | ✓ | ✓ | ✓
-`windows-2019` | ✓ | ✓ | ✓ | ✓ | ✓
-`windows-2016` | ✓ | ✓ | ✓ | ✓ | ✓
+`ubuntu-20.04` | ✓ | | |
+`ubuntu-18.04` | ✓ | ✓ | ✓
+`macos-11.0` | ✓ | ✓ | ✓ | ✓
+`macos-10.15` | ✓ | ✓ | ✓ | ✓
+`windows-2019` | ✓ | ✓ | ✓ | ✓
+`windows-2016` | ✓ | ✓ | ✓ | ✓
 
 Test against multiple versions
 
 ```yml
     strategy:
       matrix:
-        mariadb-version: [10.5, 10.4, 10.3, 10.2, 10.1]
+        mariadb-version: [10.5, 10.4, 10.3, 10.2]
     steps:
     - uses: ankane/setup-mariadb@v1
       with:

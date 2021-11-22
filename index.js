@@ -29,7 +29,7 @@ function addToPath(newPath) {
 
 const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || '10.6').toFixed(1);
 
-if (!['10.6', '10.5', '10.4', '10.3', '10.2', '10.1'].includes(mariadbVersion)) {
+if (!['10.6', '10.5', '10.4', '10.3', '10.2'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
