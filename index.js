@@ -79,6 +79,7 @@ if (process.platform == 'darwin') {
   const image = process.env['ImageOS'];
   if (image == 'ubuntu20') {
     // clear previous data
+    run(`sudo systemctl stop mysql.service`);
     run(`sudo rm -rf /var/lib/mysql`);
   }
 
