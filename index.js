@@ -29,7 +29,7 @@ function addToPath(newPath) {
 
 const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || '10.6').toFixed(1);
 
-if (!['10.6', '10.5', '10.4', '10.3', '10.2'].includes(mariadbVersion)) {
+if (!['10.7', '10.6', '10.5', '10.4', '10.3', '10.2'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
@@ -57,6 +57,7 @@ if (process.platform == 'darwin') {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
   process.chdir(tmpDir);
   const versionMap = {
+    '10.7': '10.7.3',
     '10.6': '10.6.5',
     '10.5': '10.5.13',
     '10.4': '10.4.22',
