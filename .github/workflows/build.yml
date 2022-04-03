@@ -21,15 +21,15 @@ jobs:
             mariadb-version: 10.3
           - os: ubuntu-18.04
             mariadb-version: 10.2
-          - os: macos-11.0
+          - os: macos-11
             mariadb-version: 10.6
-          - os: macos-11.0
+          - os: macos-11
             mariadb-version: 10.5
-          - os: macos-11.0
+          - os: macos-11
             mariadb-version: 10.4
-          - os: macos-11.0
+          - os: macos-11
             mariadb-version: 10.3
-          - os: macos-11.0
+          - os: macos-11
             mariadb-version: 10.2
           - os: macos-10.15
             mariadb-version: 10.6
