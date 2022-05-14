@@ -58,12 +58,11 @@ if (process.platform == 'darwin') {
   process.chdir(tmpDir);
   const versionMap = {
     '10.7': '10.7.3',
-    '10.6': '10.6.5',
-    '10.5': '10.5.13',
-    '10.4': '10.4.22',
-    '10.3': '10.3.32',
-    '10.2': '10.2.41',
-    '10.1': '10.1.48'
+    '10.6': '10.6.7',
+    '10.5': '10.5.15',
+    '10.4': '10.4.24',
+    '10.3': '10.3.34',
+    '10.2': '10.2.43'
   };
   const fullVersion = versionMap[mariadbVersion];
   run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
@@ -78,7 +77,7 @@ if (process.platform == 'darwin') {
   run(`"${bin}\\mysql" -u root -e "FLUSH PRIVILEGES"`);
 } else {
   const image = process.env['ImageOS'];
-  if (image == 'ubuntu20') {
+  if (image == 'ubuntu20' || image == 'ubuntu22') {
     // clear previous data
     run(`sudo systemctl stop mysql.service`);
     run(`sudo rm -rf /var/lib/mysql`);
