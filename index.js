@@ -29,7 +29,7 @@ function addToPath(newPath) {
 
 const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || '10.6').toFixed(1);
 
-if (!['10.7', '10.6', '10.5', '10.4', '10.3', '10.2'].includes(mariadbVersion)) {
+if (!['10.7', '10.6', '10.5', '10.4', '10.3'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
@@ -61,8 +61,7 @@ if (process.platform == 'darwin') {
     '10.6': '10.6.7',
     '10.5': '10.5.15',
     '10.4': '10.4.24',
-    '10.3': '10.3.34',
-    '10.2': '10.2.43'
+    '10.3': '10.3.34'
   };
   const fullVersion = versionMap[mariadbVersion];
   run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);

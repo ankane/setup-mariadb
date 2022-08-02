@@ -28,22 +28,22 @@ Specify a version (defaults to the latest)
 
 Currently supports
 
-Version | `10.7` | `10.6` | `10.5` | `10.4` | `10.3` | `10.2`
---- | --- | --- | --- | --- | --- | ---
-`ubuntu-20.04` | ✓ | ✓ | ✓ | | |
-`ubuntu-18.04` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
-`macos-12` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
-`macos-11` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
-`macos-10.15` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
-`windows-2022` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
-`windows-2019` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
+Version | `10.7` | `10.6` | `10.5` | `10.4` | `10.3`
+--- | --- | --- | --- | --- | ---
+`ubuntu-20.04` | ✓ | ✓ | ✓ | |
+`ubuntu-18.04` | ✓ | ✓ | ✓ | ✓ | ✓
+`macos-12` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
+`macos-11` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
+`macos-10.15` | ✓ | ✓ | ✓ | ✓ | ✓
+`windows-2022` | ✓ | ✓ | ✓ | ✓ | ✓
+`windows-2019` | ✓ | ✓ | ✓ | ✓ | ✓
 
 Test against multiple versions
 
 ```yml
     strategy:
       matrix:
-        mariadb-version: [10.7, 10.6, 10.5, 10.4, 10.3, 10.2]
+        mariadb-version: [10.7, 10.6, 10.5, 10.4, 10.3]
     steps:
     - uses: ankane/setup-mariadb@v1
       with:
