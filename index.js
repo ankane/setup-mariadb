@@ -29,7 +29,7 @@ function addToPath(newPath) {
 
 const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || '10.6').toFixed(1);
 
-if (!['10.7', '10.6', '10.5', '10.4', '10.3'].includes(mariadbVersion)) {
+if (!['10.8', '10.7', '10.6', '10.5', '10.4', '10.3'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
@@ -48,7 +48,7 @@ if (process.platform == 'darwin') {
   addToPath(bin);
 
   // add permissions
-  if (mariadbVersion == '10.3' || mariadbVersion == '10.2') {
+  if (mariadbVersion == '10.3') {
     run(`${bin}/mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO ''@'localhost'"`);
     run(`${bin}/mysql -u root -e "FLUSH PRIVILEGES"`);
   }
@@ -57,11 +57,12 @@ if (process.platform == 'darwin') {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
   process.chdir(tmpDir);
   const versionMap = {
-    '10.7': '10.7.3',
-    '10.6': '10.6.7',
-    '10.5': '10.5.15',
-    '10.4': '10.4.24',
-    '10.3': '10.3.34'
+    '10.8': '10.8.3',
+    '10.7': '10.7.4',
+    '10.6': '10.6.8',
+    '10.5': '10.5.16',
+    '10.4': '10.4.25',
+    '10.3': '10.3.35'
   };
   const fullVersion = versionMap[mariadbVersion];
   run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
