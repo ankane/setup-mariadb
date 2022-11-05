@@ -27,7 +27,16 @@ function addToPath(newPath) {
   fs.appendFileSync(process.env.GITHUB_PATH, `${newPath}\n`);
 }
 
-const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || '10.8').toFixed(1);
+function isMac() {
+  return process.platform == 'darwin';
+}
+
+function isWindows() {
+  return process.platform == 'win32';
+}
+
+const defaultVersion = isMac() ? '10.8' : '10.9';
+const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || defaultVersion).toFixed(1);
 
 if (!['10.9', '10.8', '10.7', '10.6', '10.5', '10.4', '10.3'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
@@ -37,7 +46,7 @@ const database = process.env['INPUT_DATABASE'];
 
 let bin;
 
-if (process.platform == 'darwin') {
+if (isMac()) {
   // install
   run(`brew install mariadb@${mariadbVersion}`);
 
@@ -52,7 +61,7 @@ if (process.platform == 'darwin') {
     run(`${bin}/mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO ''@'localhost'"`);
     run(`${bin}/mysql -u root -e "FLUSH PRIVILEGES"`);
   }
-} else if (process.platform == 'win32') {
+} else if (isWindows()) {
   // install
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
   process.chdir(tmpDir);
