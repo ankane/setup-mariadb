@@ -40,6 +40,17 @@ function isSupported(mariadbVersion) {
   return supportedList.includes(mariadbVersion);
 }
 
+function fetchFullVersion(mariadbVersion) {
+  const json = execSync(`curl -Ls https://downloads.mariadb.org/rest-api/mariadb/${mariadbVersion}/latest/`, (error) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return mariadbVersion;
+    }
+  });
+  const result = Object.keys(JSON.parse(json).releases);
+  return result ? result : mariadbVersion;
+}
+
 const defaultVersion = supportedList[0];
 const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || defaultVersion).toFixed(1);
 
@@ -70,16 +81,8 @@ if (isMac()) {
   // install
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
   process.chdir(tmpDir);
-  const versionMap = {
-    '10.9': '10.9.4',
-    '10.8': '10.8.6',
-    '10.7': '10.7.7',
-    '10.6': '10.6.11',
-    '10.5': '10.5.18',
-    '10.4': '10.4.27',
-    '10.3': '10.3.37'
-  };
-  const fullVersion = versionMap[mariadbVersion];
+  
+  const fullVersion = fetchFullVersion(mariadbVersion);
   run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
   run(`msiexec /i mariadb.msi SERVICENAME=MariaDB /qn`);
 
