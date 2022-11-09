@@ -36,7 +36,7 @@ function isWindows() {
 }
 
 function formulaPresent(formula) {
-  let tap = `/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core`;
+  const tap = `/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core`;
   return fs.existsSync(`${tap}/Formula/${formula}.rb`) || fs.existsSync(`${tap}/Aliases/${formula}`);
 }
 
@@ -52,7 +52,7 @@ const database = process.env['INPUT_DATABASE'];
 let bin;
 
 if (isMac()) {
-  let formula = `mariadb@${mariadbVersion}`;
+  const formula = `mariadb@${mariadbVersion}`;
   if (!formulaPresent(formula)) {
     run('brew update');
   }
