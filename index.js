@@ -47,6 +47,11 @@ const database = process.env['INPUT_DATABASE'];
 let bin;
 
 if (isMac()) {
+  // TODO remove when images updated
+  if (mariadbVersion == '10.9' && !fs.existsSync(`/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Aliases/mariadb@${mariadbVersion}`)) {
+    run('brew update');
+  }
+
   // install
   run(`brew install mariadb@${mariadbVersion}`);
 
