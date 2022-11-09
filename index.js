@@ -35,6 +35,11 @@ function isWindows() {
   return process.platform == 'win32';
 }
 
+function formulaPresent(formula) {
+  let tap = `/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core`;
+  return fs.existsSync(`${tap}/Formula/${formula}.rb`) || fs.existsSync(`${tap}/Aliases/${formula}`);
+}
+
 const defaultVersion = isMac() ? '10.8' : '10.9';
 const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || defaultVersion).toFixed(1);
 
@@ -47,16 +52,16 @@ const database = process.env['INPUT_DATABASE'];
 let bin;
 
 if (isMac()) {
-  // TODO remove when images updated
-  if (mariadbVersion == '10.9' && !fs.existsSync(`/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core/Aliases/mariadb@${mariadbVersion}`)) {
+  let formula = `mariadb@${mariadbVersion}`;
+  if (!formulaPresent(formula)) {
     run('brew update');
   }
 
   // install
-  run(`brew install mariadb@${mariadbVersion}`);
+  run(`brew install ${formula}`);
 
   // start
-  bin = `/usr/local/opt/mariadb@${mariadbVersion}/bin`;
+  bin = `/usr/local/opt/${formula}/bin`;
   run(`${bin}/mysql.server start`);
 
   addToPath(bin);
