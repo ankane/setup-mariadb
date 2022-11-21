@@ -13,7 +13,7 @@ The missing action for MariaDB :tada:
 Add it as a step to your workflow
 
 ```yml
-    - uses: ankane/setup-mariadb@v1
+      - uses: ankane/setup-mariadb@v1
 ```
 
 ## Versions
@@ -21,9 +21,9 @@ Add it as a step to your workflow
 Specify a version
 
 ```yml
-    - uses: ankane/setup-mariadb@v1
-      with:
-        mariadb-version: 10.8
+      - uses: ankane/setup-mariadb@v1
+        with:
+          mariadb-version: 10.8
 ```
 
 Currently supports
@@ -46,9 +46,9 @@ Test against multiple versions
       matrix:
         mariadb-version: [10.9, 10.8, 10.7, 10.6, 10.5, 10.4, 10.3]
     steps:
-    - uses: ankane/setup-mariadb@v1
-      with:
-        mariadb-version: ${{ matrix.mariadb-version }}
+      - uses: ankane/setup-mariadb@v1
+        with:
+          mariadb-version: ${{ matrix.mariadb-version }}
 ```
 
 ## Options
@@ -56,9 +56,9 @@ Test against multiple versions
 Create a database
 
 ```yml
-    - uses: ankane/setup-mariadb@v1
-      with:
-        database: testdb
+      - uses: ankane/setup-mariadb@v1
+        with:
+          database: testdb
 ```
 
 ## Extra Steps
@@ -66,7 +66,7 @@ Create a database
 Run queries
 
 ```yml
-    - run: mysql -D testdb -e 'SELECT VERSION()'
+      - run: mysql -D testdb -e 'SELECT VERSION()'
 ```
 
 ## Related Actions
