@@ -40,10 +40,10 @@ function formulaPresent(formula) {
   return fs.existsSync(`${tap}/Formula/${formula}.rb`) || fs.existsSync(`${tap}/Aliases/${formula}`);
 }
 
-const defaultVersion = isMac() ? '10.8' : '10.9';
-const mariadbVersion = parseFloat(process.env['INPUT_MARIADB-VERSION'] || defaultVersion).toFixed(1);
+const defaultVersion = '10.10';
+const mariadbVersion = process.env['INPUT_MARIADB-VERSION'] || defaultVersion;
 
-if (!['10.9', '10.8', '10.7', '10.6', '10.5', '10.4', '10.3'].includes(mariadbVersion)) {
+if (!['10.10', '10.9', '10.8', '10.7', '10.6', '10.5', '10.4', '10.3'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
@@ -53,7 +53,7 @@ let bin;
 
 if (isMac()) {
   const formula = `mariadb@${mariadbVersion}`;
-  if (mariadbVersion == '10.9' && !formulaPresent(formula)) {
+  if (mariadbVersion == '10.10' && !formulaPresent(formula)) {
     run('brew update');
   }
 
@@ -76,13 +76,14 @@ if (isMac()) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
   process.chdir(tmpDir);
   const versionMap = {
-    '10.9': '10.9.3',
-    '10.8': '10.8.5',
-    '10.7': '10.7.6',
-    '10.6': '10.6.10',
-    '10.5': '10.5.17',
-    '10.4': '10.4.26',
-    '10.3': '10.3.36'
+    '10.10': '10.10.2',
+    '10.9': '10.9.4',
+    '10.8': '10.8.6',
+    '10.7': '10.7.7',
+    '10.6': '10.6.11',
+    '10.5': '10.5.18',
+    '10.4': '10.4.27',
+    '10.3': '10.3.37'
   };
   const fullVersion = versionMap[mariadbVersion];
   run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
