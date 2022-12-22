@@ -53,7 +53,7 @@ let bin;
 
 if (isMac()) {
   const formula = `mariadb@${mariadbVersion}`;
-  if (mariadbVersion == '10.10' && !formulaPresent(formula)) {
+  if (!formulaPresent(formula)) {
     run('brew update');
   }
 
