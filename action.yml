@@ -4,6 +4,8 @@ inputs:
     description: The MariaDB version to download (if necessary) and use
   database:
     description: Database to create
+  root-user-password:
+    description: Password to set for the MySQL root user. Do not use a production password
 runs:
   using: node16
   main: index.js

@@ -48,6 +48,7 @@ if (!['10.10', '10.9', '10.8', '10.7', '10.6', '10.5', '10.4', '10.3'].includes(
 }
 
 const database = process.env['INPUT_DATABASE'];
+const rootPassword = process.env['INPUT_ROOT-USER-PASSWORD'] || '';
 
 let bin;
 
@@ -71,6 +72,7 @@ if (isMac()) {
     run(`${bin}/mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO ''@'localhost'"`);
     run(`${bin}/mysql -u root -e "FLUSH PRIVILEGES"`);
   }
+
 } else if (isWindows()) {
   // install
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
@@ -96,6 +98,7 @@ if (isMac()) {
   run(`"${bin}\\mysql" -u root -e "CREATE USER 'runneradmin'@'localhost' IDENTIFIED BY ''"`);
   run(`"${bin}\\mysql" -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'runneradmin'@'localhost'"`);
   run(`"${bin}\\mysql" -u root -e "FLUSH PRIVILEGES"`);
+
 } else {
   const image = process.env['ImageOS'];
   if (image == 'ubuntu20' || image == 'ubuntu22') {
@@ -127,4 +130,9 @@ if (isMac()) {
 
 if (database) {
   runSafe(path.join(bin, 'mysqladmin'), 'create', database);
+}
+
+// set root password if specified
+if (rootPassword) {
+  runSafe(path.join(bin, 'mysqladmin'), '-uroot', 'password', rootPassword);
 }

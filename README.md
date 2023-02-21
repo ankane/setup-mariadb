@@ -61,6 +61,14 @@ Create a database
           database: testdb
 ```
 
+Set MySQL's `root` user password:
+
+```yml
+      - uses: ankane/setup-mariadb@v1
+        with:
+          root-user-password: SuperSecretPassword
+```
+
 ## Extra Steps
 
 Run queries
@@ -86,3 +94,9 @@ Everyone is encouraged to help improve this project. Here are a few ways you can
 - Fix bugs and [submit pull requests](https://github.com/ankane/setup-mariadb/pulls)
 - Write, clarify, or fix documentation
 - Suggest or add new features
+
+
+## Notes
+
+- A database user named `runneradmin` is created, with no password, who has all privleges. 
+- MySQL's `root` user has no password by default. A password can be added by using the action input `root-user-password`.
