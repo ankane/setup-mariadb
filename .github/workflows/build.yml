@@ -25,22 +25,6 @@ jobs:
             mariadb-version: 10.6
           - os: ubuntu-20.04
             mariadb-version: 10.5
-          - os: ubuntu-18.04
-            mariadb-version: "10.10"
-          - os: ubuntu-18.04
-            mariadb-version: 10.9
-          - os: ubuntu-18.04
-            mariadb-version: 10.8
-          - os: ubuntu-18.04
-            mariadb-version: 10.7
-          - os: ubuntu-18.04
-            mariadb-version: 10.6
-          - os: ubuntu-18.04
-            mariadb-version: 10.5
-          - os: ubuntu-18.04
-            mariadb-version: 10.4
-          - os: ubuntu-18.04
-            mariadb-version: 10.3
           - os: macos-12
             mariadb-version: "10.10"
           - os: macos-12
@@ -72,22 +56,6 @@ jobs:
           - os: macos-11
             mariadb-version: 10.4
           - os: macos-11
-            mariadb-version: 10.3
-          - os: macos-10.15
-            mariadb-version: "10.10"
-          - os: macos-10.15
-            mariadb-version: 10.9
-          - os: macos-10.15
-            mariadb-version: 10.8
-          - os: macos-10.15
-            mariadb-version: 10.7
-          - os: macos-10.15
-            mariadb-version: 10.6
-          - os: macos-10.15
-            mariadb-version: 10.5
-          - os: macos-10.15
-            mariadb-version: 10.4
-          - os: macos-10.15
             mariadb-version: 10.3
           - os: windows-2022
             mariadb-version: "10.10"
