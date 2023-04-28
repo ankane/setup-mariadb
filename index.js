@@ -109,7 +109,7 @@ if (isMac()) {
   run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);
   run(`echo "deb https://downloads.mariadb.com/MariaDB/mariadb-${mariadbVersion}/repo/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/mariadb.list`);
   run(`sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/mariadb.list" -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"`);
-  const package = mariadbVersion == '10.11' ? `mariadb-server` ? `mariadb-server-${mariadbVersion}`;
+  const package = mariadbVersion == '10.11' ? `mariadb-server` : `mariadb-server-${mariadbVersion}`;
   run(`sudo apt-get install ${package}`);
 
   // start
