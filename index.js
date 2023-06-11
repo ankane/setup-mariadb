@@ -9,6 +9,7 @@ function run(command) {
   console.log(command);
   let env = Object.assign({}, process.env);
   delete env.CI; // for Homebrew
+  env.HOMEBREW_NO_AUTO_UPDATE = '1';
   execSync(command, {stdio: 'inherit', env: env});
 }
 
