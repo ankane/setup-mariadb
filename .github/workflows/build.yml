@@ -13,16 +13,12 @@ jobs:
             mariadb-version: "10.10"
           - os: ubuntu-22.04
             mariadb-version: 10.9
-          - os: ubuntu-22.04
-            mariadb-version: 10.8
           - os: ubuntu-20.04
             mariadb-version: 10.11
           - os: ubuntu-20.04
             mariadb-version: "10.10"
           - os: ubuntu-20.04
             mariadb-version: 10.9
-          - os: ubuntu-20.04
-            mariadb-version: 10.8
           - os: ubuntu-20.04
             mariadb-version: 10.6
           - os: ubuntu-20.04
@@ -33,16 +29,12 @@ jobs:
             mariadb-version: "10.10"
           - os: macos-12
             mariadb-version: 10.9
-          - os: macos-12
-            mariadb-version: 10.8
           - os: macos-12
             mariadb-version: 10.6
           - os: macos-12
             mariadb-version: 10.5
           - os: macos-12
             mariadb-version: 10.4
-          - os: macos-12
-            mariadb-version: 10.3
           - os: macos-11
             mariadb-version: 10.11
           - os: macos-11
@@ -50,15 +42,11 @@ jobs:
           - os: macos-11
             mariadb-version: 10.9
           - os: macos-11
-            mariadb-version: 10.8
-          - os: macos-11
             mariadb-version: 10.6
           - os: macos-11
             mariadb-version: 10.5
           - os: macos-11
             mariadb-version: 10.4
-          - os: macos-11
-            mariadb-version: 10.3
           - os: windows-2022
             mariadb-version: 10.11
           - os: windows-2022
@@ -66,15 +54,11 @@ jobs:
           - os: windows-2022
             mariadb-version: 10.9
           - os: windows-2022
-            mariadb-version: 10.8
-          - os: windows-2022
             mariadb-version: 10.6
           - os: windows-2022
             mariadb-version: 10.5
           - os: windows-2022
             mariadb-version: 10.4
-          - os: windows-2022
-            mariadb-version: 10.3
           - os: windows-2019
             mariadb-version: 10.11
           - os: windows-2019
@@ -82,15 +66,11 @@ jobs:
           - os: windows-2019
             mariadb-version: 10.9
           - os: windows-2019
-            mariadb-version: 10.8
-          - os: windows-2019
             mariadb-version: 10.6
           - os: windows-2019
             mariadb-version: 10.5
           - os: windows-2019
             mariadb-version: 10.4
-          - os: windows-2019
-            mariadb-version: 10.3
     steps:
       - uses: actions/checkout@v3
       - uses: ./.
