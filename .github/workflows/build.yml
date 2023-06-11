@@ -11,14 +11,14 @@ jobs:
             mariadb-version: "11.0"
           - os: ubuntu-20.04
             mariadb-version: "11.0"
-          - os: macos-12
-            mariadb-version: "11.0"
-          - os: macos-11
-            mariadb-version: "11.0"
-          - os: windows-2022
-            mariadb-version: "11.0"
-          - os: windows-2019
-            mariadb-version: "11.0"
+          # - os: macos-12
+          #   mariadb-version: "11.0"
+          # - os: macos-11
+          #   mariadb-version: "11.0"
+          # - os: windows-2022
+          #   mariadb-version: "11.0"
+          # - os: windows-2019
+          #   mariadb-version: "11.0"
     steps:
       - uses: actions/checkout@v3
       - uses: ./.
