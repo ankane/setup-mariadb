@@ -28,14 +28,14 @@ Specify a version
 
 Currently supports
 
-Version | `11.0` | `10.11` | `10.10` | `10.9` | `10.8` | `10.7` | `10.6` | `10.5` | `10.4`
---- | --- | --- | --- | --- | --- | --- | --- | --- | ---
-`ubuntu-22.04` | ✓ | default | ✓ | ✓ | EOL | | | |
-`ubuntu-20.04` | ✓ | default | ✓ | ✓ | EOL | EOL | ✓ | ✓ |
-`macos-12` | ✓ | default | ✓ | ✓ | EOL | EOL | ✓ | ✓ | ✓ | ✓
-`macos-11` | ✓ | default | ✓ | ✓ | EOL | EOL | ✓ | ✓ | ✓ | ✓
-`windows-2022` | ✓ | default | ✓ | ✓ | EOL | EOL | ✓ | ✓ | ✓
-`windows-2019` | ✓ | default | ✓ | ✓ | EOL | EOL | ✓ | ✓ | ✓
+Version | `11.0` | `10.11` | `10.10` | `10.9` | `10.6` | `10.5` | `10.4`
+--- | --- | --- | --- | --- | --- | --- | ---
+`ubuntu-22.04` | ✓ | default | ✓ | ✓ | | |
+`ubuntu-20.04` | ✓ | default | ✓ | ✓ | ✓ | ✓ |
+`macos-12` | ✓ | default | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
+`macos-11` | ✓ | default | ✓ | ✓ | ✓ | ✓ | ✓ | ✓
+`windows-2022` | ✓ | default | ✓ | ✓ | ✓ | ✓ | ✓
+`windows-2019` | ✓ | default | ✓ | ✓ | ✓ | ✓ | ✓
 
 Test against multiple versions
 
