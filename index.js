@@ -9,6 +9,7 @@ function run(command) {
   console.log(command);
   let env = Object.assign({}, process.env);
   delete env.CI; // for Homebrew
+  env.HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK = '1';
   execSync(command, {stdio: 'inherit', env: env});
 }
 
@@ -43,7 +44,7 @@ function formulaPresent(formula) {
 const defaultVersion = '10.11';
 const mariadbVersion = process.env['INPUT_MARIADB-VERSION'] || defaultVersion;
 
-if (!['10.11', '10.10', '10.9', '10.8', '10.7', '10.6', '10.5', '10.4', '10.3'].includes(mariadbVersion)) {
+if (!['11.0', '10.11', '10.10', '10.9', '10.8', '10.7', '10.6', '10.5', '10.4', '10.3'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
@@ -76,6 +77,7 @@ if (isMac()) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
   process.chdir(tmpDir);
   const versionMap = {
+    '11.0': '11.0.2',
     '10.11': '10.11.2',
     '10.10': '10.10.2',
     '10.9': '10.9.4',
@@ -109,7 +111,7 @@ if (isMac()) {
   run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);
   run(`echo "deb https://downloads.mariadb.com/MariaDB/mariadb-${mariadbVersion}/repo/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/mariadb.list`);
   run(`sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/mariadb.list" -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"`);
-  const package = mariadbVersion == '10.11' ? `mariadb-server` : `mariadb-server-${mariadbVersion}`;
+  const package = (mariadbVersion == '10.11' || mariadbVersion == '11.0') ? `mariadb-server` : `mariadb-server-${mariadbVersion}`;
   run(`sudo apt-get install ${package}`);
 
   // start
