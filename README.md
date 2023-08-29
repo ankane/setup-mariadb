@@ -23,7 +23,7 @@ Specify a version
 ```yml
       - uses: ankane/setup-mariadb@v1
         with:
-          mariadb-version: 10.11
+          mariadb-version: "10.11"
 ```
 
 Currently supports
@@ -42,7 +42,7 @@ Test against multiple versions
 ```yml
     strategy:
       matrix:
-        mariadb-version: ["11.0", 10.11, "10.10", 10.9]
+        mariadb-version: ["11.1", "11.0", "10.11", "10.10"]
     steps:
       - uses: ankane/setup-mariadb@v1
         with:
