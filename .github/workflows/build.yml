@@ -82,7 +82,7 @@ jobs:
           - os: windows-2019
             mariadb-version: 10.4
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.
         with:
           mariadb-version: ${{ matrix.mariadb-version }}
