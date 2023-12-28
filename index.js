@@ -45,7 +45,7 @@ function formulaPresent(formula) {
 const defaultVersion = '10.11';
 const mariadbVersion = process.env['INPUT_MARIADB-VERSION'] || defaultVersion;
 
-if (!['11.2', '11.1', '11.0', '10.11', '10.10', '10.9', '10.8', '10.7', '10.6', '10.5', '10.4', '10.3'].includes(mariadbVersion)) {
+if (!['11.2', '11.1', '11.0', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
@@ -82,14 +82,8 @@ if (isMac()) {
     '11.1': '11.1.2',
     '11.0': '11.0.4',
     '10.11': '10.11.6',
-    '10.10': '10.10.7',
-    '10.9': '10.9.8',
-    '10.8': '10.8.8',
-    '10.7': '10.7.8',
     '10.6': '10.6.16',
-    '10.5': '10.5.23',
-    '10.4': '10.4.32',
-    '10.3': '10.3.39'
+    '10.5': '10.5.23'
   };
   const fullVersion = versionMap[mariadbVersion];
   run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);

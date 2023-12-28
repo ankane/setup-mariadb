@@ -67,8 +67,6 @@ jobs:
             mariadb-version: 10.6
           - os: windows-2022
             mariadb-version: 10.5
-          - os: windows-2022
-            mariadb-version: 10.4
 
           - os: windows-2019
             mariadb-version: 11.2
@@ -82,8 +80,6 @@ jobs:
             mariadb-version: 10.6
           - os: windows-2019
             mariadb-version: 10.5
-          - os: windows-2019
-            mariadb-version: 10.4
     steps:
       - uses: actions/checkout@v4
       - uses: ./.
