@@ -42,7 +42,7 @@ Test against multiple versions
 ```yml
     strategy:
       matrix:
-        mariadb-version: ["11.1", "11.0", "10.11", "10.10"]
+        mariadb-version: ["11.2", "11.1", "11.0", "10.11"]
     steps:
       - uses: ankane/setup-mariadb@v1
         with:
