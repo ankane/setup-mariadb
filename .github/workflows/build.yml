@@ -41,8 +41,6 @@ jobs:
             mariadb-version: 10.6
           - os: macos-13
             mariadb-version: 10.5
-          - os: macos-13
-            mariadb-version: 10.4
 
           - os: macos-12
             mariadb-version: 11.2
@@ -56,8 +54,6 @@ jobs:
             mariadb-version: 10.6
           - os: macos-12
             mariadb-version: 10.5
-          - os: macos-12
-            mariadb-version: 10.4
 
           - os: windows-2022
             mariadb-version: 11.2
