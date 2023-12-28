@@ -41,10 +41,11 @@ function formulaPresent(formula) {
   return fs.existsSync(`${tap}/Formula/${formula}.rb`) || fs.existsSync(`${tap}/Aliases/${formula}`);
 }
 
+// latest LTS release
 const defaultVersion = '10.11';
 const mariadbVersion = process.env['INPUT_MARIADB-VERSION'] || defaultVersion;
 
-if (!['11.1', '11.0', '10.11', '10.10', '10.9', '10.8', '10.7', '10.6', '10.5', '10.4', '10.3'].includes(mariadbVersion)) {
+if (!['11.2', '11.1', '11.0', '10.11', '10.10', '10.9', '10.8', '10.7', '10.6', '10.5', '10.4', '10.3'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
@@ -77,17 +78,18 @@ if (isMac()) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
   process.chdir(tmpDir);
   const versionMap = {
+    '11.2': '11.2.2',
     '11.1': '11.1.2',
-    '11.0': '11.0.3',
-    '10.11': '10.11.5',
-    '10.10': '10.10.6',
+    '11.0': '11.0.4',
+    '10.11': '10.11.6',
+    '10.10': '10.10.7',
     '10.9': '10.9.8',
-    '10.8': '10.8.6',
-    '10.7': '10.7.7',
-    '10.6': '10.6.15',
-    '10.5': '10.5.22',
-    '10.4': '10.4.31',
-    '10.3': '10.3.37'
+    '10.8': '10.8.8',
+    '10.7': '10.7.8',
+    '10.6': '10.6.16',
+    '10.5': '10.5.23',
+    '10.4': '10.4.32',
+    '10.3': '10.3.39'
   };
   const fullVersion = versionMap[mariadbVersion];
   run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
@@ -112,7 +114,7 @@ if (isMac()) {
   run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);
   run(`echo "deb https://downloads.mariadb.com/MariaDB/mariadb-${mariadbVersion}/repo/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/mariadb.list`);
   run(`sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/mariadb.list" -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"`);
-  const package = ['11.1', '11.0', '10.11'].includes(mariadbVersion) ? `mariadb-server` : `mariadb-server-${mariadbVersion}`;
+  const package = ['11.2', '11.1', '11.0', '10.11'].includes(mariadbVersion) ? `mariadb-server` : `mariadb-server-${mariadbVersion}`;
   run(`sudo apt-get install ${package}`);
 
   // start
