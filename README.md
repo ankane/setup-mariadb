@@ -34,7 +34,7 @@ Version | `11.2` | `11.1` | `11.0` | `10.11` | `10.6` | `10.5` | `10.4`
 `ubuntu-20.04` | ✓ | ✓ | ✓ | default | ✓ | ✓ |
 `macos-13` | ✓ | ✓ | ✓ | default | ✓ | ✓ |
 `macos-12` | ✓ | ✓ | ✓ | default | ✓ | ✓ |
-`windows-2022` | ✓ | ✓ | ✓ | default | ✓ | ✓ | ✓
+`windows-2022` | ✓ | ✓ | ✓ | default | ✓ | ✓
 `windows-2019` | ✓ | ✓ | ✓ | default | ✓ | ✓ | ✓
 
 Test against multiple versions
