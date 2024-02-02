@@ -37,8 +37,9 @@ function isWindows() {
 }
 
 function formulaPresent(formula) {
-  const tap = `/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core`;
-  return fs.existsSync(`${tap}/Formula/${formula}.rb`) || fs.existsSync(`${tap}/Aliases/${formula}`);
+  const tapPrefix = process.env['ImageOS'] == 'macos14' ? '/opt/homebrew' : '/usr/local/Homebrew';
+  const tap = `${tapPrefix}/Library/Taps/homebrew/homebrew-core`;
+  return fs.existsSync(`${tap}/Formula/${formula[0]}/${formula}.rb`) || fs.existsSync(`${tap}/Aliases/${formula}`);
 }
 
 // latest LTS release
@@ -63,7 +64,8 @@ if (isMac()) {
   run(`brew install ${formula}`);
 
   // start
-  bin = `/usr/local/opt/${formula}/bin`;
+  const prefix = process.env['ImageOS'] == 'macos14' ? '/opt/homebrew' : '/usr/local';
+  bin = `${prefix}/opt/${formula}/bin`;
   run(`${bin}/mysql.server start`);
 
   addToPath(bin);

@@ -32,6 +32,7 @@ Version | `11.2` | `11.1` | `11.0` | `10.11` | `10.6` | `10.5`
 --- | ---| --- | --- | --- | --- | ---
 `ubuntu-22.04` | ✓ | ✓ | ✓ | default | |
 `ubuntu-20.04` | ✓ | ✓ | ✓ | default | ✓ | ✓
+`macos-14` | ✓ | ✓ | ✓ | default | ✓ | ✓
 `macos-13` | ✓ | ✓ | ✓ | default | ✓ | ✓
 `macos-12` | ✓ | ✓ | ✓ | default | ✓ | ✓
 `windows-2022` | ✓ | ✓ | ✓ | default | ✓ | ✓
