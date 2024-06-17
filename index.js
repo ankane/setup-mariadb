@@ -46,7 +46,8 @@ function formulaPresent(formula) {
 const defaultVersion = '10.11';
 const mariadbVersion = process.env['INPUT_MARIADB-VERSION'] || defaultVersion;
 
-if (!['11.4', '11.3', '11.2', '11.1', '11.0', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
+// only add LTS releases going forward
+if (!['11.4', '11.2', '11.1', '11.0', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
@@ -55,10 +56,6 @@ const database = process.env['INPUT_DATABASE'];
 let bin;
 
 if (isMac()) {
-  if (mariadbVersion == '11.3') {
-    throw `MariaDB version not supported on Mac: ${mariadbVersion}`;
-  }
-
   const formula = `mariadb@${mariadbVersion}`;
   if (!formulaPresent(formula)) {
     run('brew update');
@@ -79,7 +76,6 @@ if (isMac()) {
   process.chdir(tmpDir);
   const versionMap = {
     '11.4': '11.4.2',
-    '11.3': '11.3.2',
     '11.2': '11.2.2',
     '11.1': '11.1.2',
     '11.0': '11.0.4',
@@ -110,7 +106,7 @@ if (isMac()) {
   run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);
   run(`echo "deb https://downloads.mariadb.com/MariaDB/mariadb-${mariadbVersion}/repo/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/mariadb.list`);
   run(`sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/mariadb.list" -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"`);
-  const package = ['11.4', '11.3', '11.2', '11.1', '11.0', '10.11'].includes(mariadbVersion) ? `mariadb-server` : `mariadb-server-${mariadbVersion}`;
+  const package = ['11.4', '11.2', '11.1', '11.0', '10.11'].includes(mariadbVersion) ? `mariadb-server` : `mariadb-server-${mariadbVersion}`;
   run(`sudo apt-get install ${package}`);
 
   // start
