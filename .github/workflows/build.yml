@@ -8,6 +8,10 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
+            mariadb-version: 11.4
+          - os: ubuntu-22.04
+            mariadb-version: 11.3
+          - os: ubuntu-22.04
             mariadb-version: 11.2
           - os: ubuntu-22.04
             mariadb-version: 11.1
@@ -17,6 +21,10 @@ jobs:
             mariadb-version: 10.11
 
           - os: ubuntu-20.04
+            mariadb-version: 11.4
+          - os: ubuntu-20.04
+            mariadb-version: 11.3
+          - os: ubuntu-20.04
             mariadb-version: 11.2
           - os: ubuntu-20.04
             mariadb-version: 11.1
@@ -30,6 +38,8 @@ jobs:
             mariadb-version: 10.5
 
           - os: macos-14
+            mariadb-version: 11.4
+          - os: macos-14
             mariadb-version: 11.2
           - os: macos-14
             mariadb-version: 11.1
@@ -43,6 +53,8 @@ jobs:
             mariadb-version: 10.5
 
           - os: macos-13
+            mariadb-version: 11.4
+          - os: macos-13
             mariadb-version: 11.2
           - os: macos-13
             mariadb-version: 11.1
@@ -56,6 +68,8 @@ jobs:
             mariadb-version: 10.5
 
           - os: macos-12
+            mariadb-version: 11.4
+          - os: macos-12
             mariadb-version: 11.2
           - os: macos-12
             mariadb-version: 11.1
@@ -69,6 +83,10 @@ jobs:
             mariadb-version: 10.5
 
           - os: windows-2022
+            mariadb-version: 11.4
+          - os: windows-2022
+            mariadb-version: 11.3
+          - os: windows-2022
             mariadb-version: 11.2
           - os: windows-2022
             mariadb-version: 11.1
@@ -81,6 +99,10 @@ jobs:
           - os: windows-2022
             mariadb-version: 10.5
 
+          - os: windows-2019
+            mariadb-version: 11.4
+          - os: windows-2019
+            mariadb-version: 11.3
           - os: windows-2019
             mariadb-version: 11.2
           - os: windows-2019
