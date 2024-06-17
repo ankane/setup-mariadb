@@ -43,7 +43,7 @@ function formulaPresent(formula) {
 }
 
 // latest LTS release
-const defaultVersion = '10.11';
+const defaultVersion = '11.4';
 const mariadbVersion = process.env['INPUT_MARIADB-VERSION'] || defaultVersion;
 
 // only add LTS releases going forward

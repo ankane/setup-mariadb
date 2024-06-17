@@ -23,20 +23,20 @@ Specify a version
 ```yml
       - uses: ankane/setup-mariadb@v1
         with:
-          mariadb-version: "10.11"
+          mariadb-version: "11.4"
 ```
 
 Currently supports
 
 Version | `11.4` | `11.2` | `11.1` | `10.11` | `10.6` | `10.5`
 --- | --- | --- | --- | --- | --- | ---
-`ubuntu-22.04` | ✓ | ✓ | ✓ | default | |
-`ubuntu-20.04` | ✓ | ✓ | ✓ | default | ✓ | ✓
-`macos-14` | ✓ | ✓ | ✓ | default | ✓ | ✓
-`macos-13` | ✓ | ✓ | ✓ | default | ✓ | ✓
-`macos-12` | ✓ | ✓ | ✓ | default | ✓ | ✓
-`windows-2022` | ✓ | ✓ | ✓ | default | ✓ | ✓
-`windows-2019` | ✓ | ✓ | ✓ | default | ✓ | ✓
+`ubuntu-22.04` | default | ✓ | ✓ | ✓ | |
+`ubuntu-20.04` | default | ✓ | ✓ | ✓ | ✓ | ✓
+`macos-14` | default | ✓ | ✓ | ✓ | ✓ | ✓
+`macos-13` | default | ✓ | ✓ | ✓ | ✓ | ✓
+`macos-12` | default | ✓ | ✓ | ✓ | ✓ | ✓
+`windows-2022` | default | ✓ | ✓ | ✓ | ✓ | ✓
+`windows-2019` | default | ✓ | ✓ | ✓ | ✓ | ✓
 
 Test against multiple versions
 
