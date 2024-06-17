@@ -7,6 +7,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - os: ubuntu-24.04
+            mariadb-version: 11.4
+          - os: ubuntu-24.04
+            mariadb-version: 11.2
+          - os: ubuntu-24.04
+            mariadb-version: 11.1
+          - os: ubuntu-24.04
+            mariadb-version: 10.11
+
           - os: ubuntu-22.04
             mariadb-version: 11.4
           - os: ubuntu-22.04
