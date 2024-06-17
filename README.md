@@ -6,7 +6,7 @@ The missing action for MariaDB :tada:
 - Works on Linux, Mac, and Windows
 - Supports different versions
 
-[![Build Status](https://github.com/ankane/setup-mariadb/workflows/build/badge.svg?branch=v1)](https://github.com/ankane/setup-mariadb/actions)
+[![Build Status](https://github.com/ankane/setup-mariadb/actions/workflows/build.yml/badge.svg)](https://github.com/ankane/setup-mariadb/actions)
 
 ## Getting Started
 
