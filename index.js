@@ -47,7 +47,7 @@ const defaultVersion = '10.11';
 const mariadbVersion = process.env['INPUT_MARIADB-VERSION'] || defaultVersion;
 
 // only add LTS releases going forward
-if (!['11.4', '11.2', '11.1', '11.0', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
+if (!['11.4', '11.2', '11.1', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
