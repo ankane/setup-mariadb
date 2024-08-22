@@ -85,7 +85,7 @@ if (isMac()) {
   };
   const fullVersion = versionMap[mariadbVersion];
   run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
-  run(`msiexec /i mariadb.msi SERVICENAME=MariaDB ADDLOCAL=DBInstance,Client,MYSQLSERVER,SharedLibraries,DEVEL /qn`);
+  run(`msiexec /i mariadb.msi SERVICENAME=MariaDB ADDLOCAL=MYSQLSERVER /qn`);
 
   bin = `C:\\Program Files\\MariaDB ${mariadbVersion}\\bin`;
   addToPath(bin);
