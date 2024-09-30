@@ -103,11 +103,8 @@ if (isMac()) {
   }
 
   // install
-  run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);
-  run(`echo "deb https://downloads.mariadb.com/MariaDB/mariadb-${mariadbVersion}/repo/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/mariadb.list`);
-  run(`sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/mariadb.list" -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"`);
-  const package = ['11.4', '11.2', '11.1', '11.0', '10.11'].includes(mariadbVersion) ? `mariadb-server` : `mariadb-server-${mariadbVersion}`;
-  run(`sudo apt-get install ${package}`);
+  run(`curl -LsS https://r.mariadb.com/downloads/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version=mariadb-${mariadbVersion} --skip-maxscale --skip-tools`);
+  run(`sudo apt-get install mariadb-server`);
 
   // start
   run(`sudo systemctl start mariadb`);

@@ -16,6 +16,8 @@ jobs:
             mariadb-version: 11.4
           - os: ubuntu-22.04
             mariadb-version: 10.11
+          - os: ubuntu-22.04
+            mariadb-version: 10.6
 
           - os: ubuntu-20.04
             mariadb-version: 11.4
