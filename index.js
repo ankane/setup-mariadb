@@ -1,8 +1,9 @@
-const execSync = require("child_process").execSync;
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const process = require('process');
+const https = require('https');
+const execSync = require('child_process').execSync;
 const spawnSync = require('child_process').spawnSync;
 
 function run(command) {
@@ -84,7 +85,13 @@ if (isMac()) {
     '10.5': '10.5.23'
   };
   const fullVersion = versionMap[mariadbVersion];
-  run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
+  // Download file via JS
+  const url = `https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`;
+  const file = fs.createWriteStream("mariadb.msi");
+  https.get(url, function(response) {
+    response.pipe(file);
+  });
+
   run(`msiexec /i mariadb.msi SERVICENAME=MariaDB /qn`);
 
   bin = `C:\\Program Files\\MariaDB ${mariadbVersion}\\bin`;
