@@ -84,7 +84,7 @@ if (isMac()) {
     '10.5': '10.5.23'
   };
   const fullVersion = versionMap[mariadbVersion];
-  run(`curl -Ls -o mariadb.msi https://downloads.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
+  run(`curl -Ls -o mariadb.msi https://dlm.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
   run(`msiexec /i mariadb.msi SERVICENAME=MariaDB /qn`);
 
   bin = `C:\\Program Files\\MariaDB ${mariadbVersion}\\bin`;
