@@ -110,7 +110,8 @@ if (isMac()) {
       `curl -Ls --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0" -o "${targetPath}" https://dlm.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`,
     );
   }
-  run(`"${targetPath}" /i mariadb.msi SERVICENAME=MariaDB /qn`);
+  // run(`msiexec /i mariadb.msi SERVICENAME=MariaDB /qn`);
+  run(`msiexec /i "${targetPath}" SERVICENAME=MariaDB /qn`);
 
   bin = `C:\\Program Files\\MariaDB ${mariadbVersion}\\bin`;
   addToPath(bin);
