@@ -107,7 +107,7 @@ if (isMac()) {
   bin = `${downloaddir}\\mariadb-${fullVersion}.msi`;
   if (!fs.existsSync(targetPath)) {
     run(
-      `curl -Ls -o "${targetPath}" https://dlm.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`,
+      `curl -Ls --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0" -o "${targetPath}" https://dlm.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`,
     );
   }
   run(`"${targetPath}" /i mariadb.msi SERVICENAME=MariaDB /qn`);
