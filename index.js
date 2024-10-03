@@ -60,6 +60,18 @@ if (
 const database = process.env["INPUT_DATABASE"];
 
 const input_downloaddir = process.env["INPUT_DOWNLOADDIR"];
+const input_mirror = process.env["INPUT_MIRROR"]; // Defaults to https://dlm.mariadb.com
+// Get options added at the end fo the url ("...?<OPTIONS>)
+const input_download_getopt = process.env["INPUT_DOWNLOAD_GETOPT"];
+
+// Final value for mirro
+const mirror = input_mirror;
+
+if (input_download_getopt !== "") {
+  get_opt = `?${input_download_getopt}`;
+} else {
+  get_opt = "";
+}
 
 // Convert downloaddir to a System Path (e.g., '/' to '\\' on windows
 const downloadDirPath = path.parse(input_downloaddir);
@@ -107,7 +119,7 @@ if (isMac()) {
   bin = `${downloaddir}\\mariadb-${fullVersion}.msi`;
   if (!fs.existsSync(targetPath)) {
     run(
-      `curl -Ls --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0" -o "${targetPath}" https://dlm.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`,
+      `curl -Ls --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0" -o "${targetPath}" ${mirror}/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi${get_opt}`,
     );
   }
   // run(`msiexec /i mariadb.msi SERVICENAME=MariaDB /qn`);
@@ -137,7 +149,7 @@ if (isMac()) {
     `sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`,
   );
   run(
-    `echo "deb [arch=amd64,arm64] https://dlm.mariadb.com/repo/mariadb-server/${mariadbVersion}/repo/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/mariadb.list`,
+    `echo "deb [arch=amd64,arm64] ${mirror}/repo/mariadb-server/${mariadbVersion}/repo/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/mariadb.list`,
   );
   run(
     `sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/mariadb.list" -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"`,
