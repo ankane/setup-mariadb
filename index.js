@@ -89,7 +89,7 @@ if (isMac()) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "mariadb-"));
   process.chdir(tmpDir);
   const versionMap = {
-    11.4: "11.4.2",
+    11.4: "11.4.3",
     11.2: "11.2.2",
     11.1: "11.1.2",
     "11.0": "11.0.4",
