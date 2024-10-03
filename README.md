@@ -13,7 +13,7 @@ The missing action for MariaDB :tada:
 Add it as a step to your workflow
 
 ```yml
-      - uses: ankane/setup-mariadb@v1
+- uses: ankane/setup-mariadb@v1
 ```
 
 ## Versions
@@ -21,34 +21,34 @@ Add it as a step to your workflow
 Specify a version
 
 ```yml
-      - uses: ankane/setup-mariadb@v1
-        with:
-          mariadb-version: "11.4"
+- uses: ankane/setup-mariadb@v1
+  with:
+    mariadb-version: "11.4"
 ```
 
 Currently supports
 
-Version | `11.4` | `10.11` | `10.6` | `10.5`
---- | --- | --- | --- | ---
-`ubuntu-24.04` | default | ✓ | |
-`ubuntu-22.04` | default | ✓ | ✓ |
-`ubuntu-20.04` | default | ✓ | ✓ | ✓
-`macos-14` | default | ✓ | ✓ | ✓
-`macos-13` | default | ✓ | ✓ | ✓
-`macos-12` | default | ✓ | ✓ | ✓
-`windows-2022` | default | ✓ | ✓ | ✓
-`windows-2019` | default | ✓ | ✓ | ✓
+| Version        | `11.4`  | `10.11` | `10.6` | `10.5` |
+| -------------- | ------- | ------- | ------ | ------ |
+| `ubuntu-24.04` | default | ✓       |        |        |
+| `ubuntu-22.04` | default | ✓       | ✓      |        |
+| `ubuntu-20.04` | default | ✓       | ✓      | ✓      |
+| `macos-14`     | default | ✓       | ✓      | ✓      |
+| `macos-13`     | default | ✓       | ✓      | ✓      |
+| `macos-12`     | default | ✓       | ✓      | ✓      |
+| `windows-2022` | default | ✓       | ✓      | ✓      |
+| `windows-2019` | default | ✓       | ✓      | ✓      |
 
 Test against multiple versions
 
 ```yml
-    strategy:
-      matrix:
-        mariadb-version: ["11.4", "10.11", "10.6"]
-    steps:
-      - uses: ankane/setup-mariadb@v1
-        with:
-          mariadb-version: ${{ matrix.mariadb-version }}
+strategy:
+  matrix:
+    mariadb-version: ["11.4", "10.11", "10.6"]
+steps:
+  - uses: ankane/setup-mariadb@v1
+    with:
+      mariadb-version: ${{ matrix.mariadb-version }}
 ```
 
 ## Options
@@ -56,9 +56,9 @@ Test against multiple versions
 Create a database
 
 ```yml
-      - uses: ankane/setup-mariadb@v1
-        with:
-          database: testdb
+- uses: ankane/setup-mariadb@v1
+  with:
+    database: testdb
 ```
 
 ## Extra Steps
@@ -66,7 +66,7 @@ Create a database
 Run queries
 
 ```yml
-      - run: mysql -D testdb -e 'SELECT VERSION()'
+- run: mysql -D testdb -e 'SELECT VERSION()'
 ```
 
 ## Related Actions
