@@ -9,6 +9,14 @@ inputs:
     description: Directory to cache MariaDB data
     required: false
     default: ".cache/mariadb"
+  mirror:
+    description: Server URL to download from (replaces dlm.mariadb.com)
+    required: false
+    default: "https://dlm.mariadb.com"
+  download_getopt:
+    description: Get options added to the download url (to allow limiting downloads from mirror)
+    required: false
+    default: ""
 runs:
   using: node20
   main: index.js
