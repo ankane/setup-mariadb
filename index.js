@@ -1,8 +1,9 @@
-const execSync = require("child_process").execSync;
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const process = require("process");
+const https = require("https");
+const execSync = require("child_process").execSync;
 const spawnSync = require("child_process").spawnSync;
 
 function run(command) {
