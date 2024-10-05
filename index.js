@@ -119,9 +119,15 @@ if (isMac()) {
   }
   bin = `${downloaddir}\\mariadb-${fullVersion}.msi`;
   if (!fs.existsSync(targetPath)) {
-    run(
-      `curl -Ls --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0" -o "${targetPath}" ${mirror}/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi${get_opt}`,
-    );
+    // run(
+    //   `curl -Ls --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0" -o "${targetPath}" ${mirror}/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi${get_opt}`,
+    // );
+    // Download file via JS
+    const url = `${mirror}/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`;
+    const file = fs.createWriteStream("${targetPath}");
+    https.get(url, function(response) {
+      response.pipe(file);
+    });
   }
   // run(`msiexec /i mariadb.msi SERVICENAME=MariaDB /qn`);
   run(`msiexec /i "${targetPath}" SERVICENAME=MariaDB /qn`);
