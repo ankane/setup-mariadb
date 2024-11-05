@@ -28,6 +28,15 @@ jobs:
           - os: ubuntu-20.04
             mariadb-version: 10.5
 
+          - os: macos-15
+            mariadb-version: 11.4
+          - os: macos-15
+            mariadb-version: 10.11
+          - os: macos-15
+            mariadb-version: 10.6
+          - os: macos-15
+            mariadb-version: 10.5
+
           - os: macos-14
             mariadb-version: 11.4
           - os: macos-14
