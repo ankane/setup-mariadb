@@ -95,8 +95,7 @@ if (isMac()) {
   run(`"${bin}\\mysql" -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'runneradmin'@'localhost'"`);
   run(`"${bin}\\mysql" -u root -e "FLUSH PRIVILEGES"`);
 } else {
-  const image = process.env['ImageOS'];
-  if (image == 'ubuntu20' || image == 'ubuntu22' || image == 'ubuntu24') {
+  if (process.arch != 'arm64') {
     // clear previous data
     run(`sudo systemctl stop mysql.service`);
     run(`sudo rm -rf /var/lib/mysql`);
