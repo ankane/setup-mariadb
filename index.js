@@ -118,7 +118,6 @@ if (isMac()) {
   run(`sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'localhost'"`);
   run(`sudo mysql -e "FLUSH PRIVILEGES"`);
 
-
   bin = `/usr/bin`;
 }
 
