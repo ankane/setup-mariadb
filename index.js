@@ -74,13 +74,11 @@ if (isMac()) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
   process.chdir(tmpDir);
   const versionMap = {
-    '11.4': '11.4.3',
-    '11.2': '11.2.2',
-    '11.1': '11.1.2',
-    '11.0': '11.0.4',
-    '10.11': '10.11.6',
-    '10.6': '10.6.16',
-    '10.5': '10.5.23'
+    '11.8': '11.8.2',
+    '11.4': '11.4.7',
+    '10.11': '10.11.13',
+    '10.6': '10.6.22',
+    '10.5': '10.5.29'
   };
   const fullVersion = versionMap[mariadbVersion];
   run(`curl -Ls -o mariadb.msi https://dlm.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
