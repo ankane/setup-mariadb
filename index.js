@@ -42,12 +42,11 @@ function formulaPresent(formula) {
   return fs.existsSync(`${tap}/Formula/${formula[0]}/${formula}.rb`) || fs.existsSync(`${tap}/Aliases/${formula}`);
 }
 
-// latest LTS release
 const defaultVersion = '11.4';
 const mariadbVersion = process.env['INPUT_MARIADB-VERSION'] || defaultVersion;
 
-// only add LTS releases going forward
-if (!['11.4', '11.2', '11.1', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
+// only LTS releases
+if (!['11.8', '11.4', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
