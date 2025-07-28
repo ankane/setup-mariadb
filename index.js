@@ -9,8 +9,11 @@ function run() {
   const args = Array.from(arguments);
   console.log(args.map(v => v.toString().includes(' ') ? `"${v}"` : v).join(' '));
   const command = args.shift();
+  let env = Object.assign({}, process.env);
+  env.HOMEBREW_NO_AUTO_UPDATE = '1';
+  env.HOMEBREW_NO_INSTALL_CLEANUP = '1';
   // spawn is safer and more lightweight than exec
-  const ret = spawnSync(command, args, {stdio: 'inherit'});
+  const ret = spawnSync(command, args, {stdio: 'inherit', env: env});
   if (ret.status !== 0) {
     throw ret.error;
   }
@@ -18,10 +21,7 @@ function run() {
 
 function runUnsafe(command) {
   console.log(command);
-  let env = Object.assign({}, process.env);
-  delete env.CI; // for Homebrew
-  env.HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK = '1';
-  execSync(command, {stdio: 'inherit', env: env});
+  execSync(command, {stdio: 'inherit'});
 }
 
 function addToPath(newPath) {
