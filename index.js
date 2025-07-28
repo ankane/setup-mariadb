@@ -5,23 +5,23 @@ const path = require('path');
 const process = require('process');
 const spawnSync = require('child_process').spawnSync;
 
-function run(command) {
-  console.log(command);
-  let env = Object.assign({}, process.env);
-  delete env.CI; // for Homebrew
-  env.HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK = '1';
-  execSync(command, {stdio: 'inherit', env: env});
-}
-
-function runSafe() {
+function run() {
   const args = Array.from(arguments);
-  console.log(args.join(' '));
+  console.log(args.map(v => v.includes(' ') ? `"${v}"` : v).join(' '));
   const command = args.shift();
   // spawn is safer and more lightweight than exec
   const ret = spawnSync(command, args, {stdio: 'inherit'});
   if (ret.status !== 0) {
     throw ret.error;
   }
+}
+
+function runUnsafe(command) {
+  console.log(command);
+  let env = Object.assign({}, process.env);
+  delete env.CI; // for Homebrew
+  env.HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK = '1';
+  execSync(command, {stdio: 'inherit', env: env});
 }
 
 function addToPath(newPath) {
@@ -57,16 +57,16 @@ let bin;
 if (isMac()) {
   const formula = `mariadb@${mariadbVersion}`;
   if (!formulaPresent(formula)) {
-    run('brew update');
+    run(`brew`, `update`);
   }
 
   // install
-  run(`brew install ${formula}`);
+  run(`brew`, `install`, formula);
 
   // start
   const prefix = process.arch == 'arm64' ? '/opt/homebrew' : '/usr/local';
   bin = `${prefix}/opt/${formula}/bin`;
-  run(`${bin}/mysql.server start`);
+  run(`${bin}/mysql.server`, `start`);
 
   addToPath(bin);
 } else if (isWindows()) {
@@ -81,43 +81,48 @@ if (isMac()) {
     '10.5': '10.5.29'
   };
   const fullVersion = versionMap[mariadbVersion];
-  run(`curl -Ls -o mariadb.msi https://dlm.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
-  run(`msiexec /i mariadb.msi SERVICENAME=MariaDB /qn`);
+  run(`curl`, `-Ls`, `-o`, `mariadb.msi`, `https://dlm.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
+  run(`msiexec`, `/i`, `mariadb.msi`, `SERVICENAME=MariaDB`, `/qn`);
 
   bin = `C:\\Program Files\\MariaDB ${mariadbVersion}\\bin`;
   addToPath(bin);
 
   // add user
-  run(`"${bin}\\mysql" -u root -e "CREATE USER 'runneradmin'@'localhost' IDENTIFIED BY ''"`);
-  run(`"${bin}\\mysql" -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'runneradmin'@'localhost'"`);
-  run(`"${bin}\\mysql" -u root -e "FLUSH PRIVILEGES"`);
+  run(`${bin}\\mysql`, `-u`, `root`, `-e`, `CREATE USER 'runneradmin'@'localhost' IDENTIFIED BY ''`);
+  run(`${bin}\\mysql`, `-u`, `root`, `-e`, `GRANT ALL PRIVILEGES ON *.* TO 'runneradmin'@'localhost'`);
+  run(`${bin}\\mysql`, `-u`, `root`, `-e`, `FLUSH PRIVILEGES`);
 } else {
   if (process.arch != 'arm64') {
     // clear previous data
-    run(`sudo systemctl stop mysql.service`);
-    run(`sudo rm -rf /var/lib/mysql`);
+    run(`sudo`, `systemctl`, `stop`, `mysql.service`);
+    run(`sudo`, `rm`, `-rf`, `/var/lib/mysql`);
   }
 
   // install
-  run(`sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`);
-  run(`echo "deb [arch=amd64,arm64] https://dlm.mariadb.com/repo/mariadb-server/${mariadbVersion}/repo/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) main" | sudo tee /etc/apt/sources.list.d/mariadb.list`);
-  run(`sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/mariadb.list" -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"`);
-  run(`sudo apt-get install mariadb-server`);
+  run(`sudo`, `apt-key`, `adv`, `--recv-keys`, `--keyserver`, `hkp://keyserver.ubuntu.com:80`, `0xF1656F24C74CD1D8`);
+  runUnsafe(`echo "deb [arch=amd64,arm64] https://dlm.mariadb.com/repo/mariadb-server/${mariadbVersion}/repo/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/mariadb.list`);
+  run(`sudo`, `apt-get`, `update`, `-o`, `Dir::Etc::sourcelist=sources.list.d/mariadb.list`, `-o`, `Dir::Etc::sourceparts=-`, `-o`, `APT::Get::List-Cleanup=0`);
+  run(`sudo`, `apt-get`, `install`, `mariadb-server`);
 
   // start
-  run(`sudo systemctl start mariadb`);
+  run(`sudo`, `systemctl`, `start`, `mariadb`);
 
   // remove root password
-  run(`sudo mysqladmin -proot password ''`);
+  run(`sudo`, `mysqladmin`, `-proot`, `password`, ``);
 
   // add user
-  run(`sudo mysql -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY ''"`);
-  run(`sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'localhost'"`);
-  run(`sudo mysql -e "FLUSH PRIVILEGES"`);
+  const user = process.env['USER'];
+  if (user != 'runner') {
+    // TODO fix
+    throw `Unsupported user: ${user}`;
+  }
+  run(`sudo`, `mysql`, `-e`, `CREATE USER '${user}'@'localhost' IDENTIFIED BY ''`);
+  run(`sudo`, `mysql`, `-e`, `GRANT ALL PRIVILEGES ON *.* TO '${user}'@'localhost'`);
+  run(`sudo`, `mysql`, `-e`, `FLUSH PRIVILEGES`);
 
   bin = `/usr/bin`;
 }
 
 if (database) {
-  runSafe(path.join(bin, 'mysqladmin'), 'create', database);
+  run(path.join(bin, 'mysqladmin'), 'create', database);
 }
