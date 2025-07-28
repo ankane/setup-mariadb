@@ -52,6 +52,9 @@ if (!['11.8', '11.4', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
 
 const database = process.env['INPUT_DATABASE'];
 
+const prog = parseFloat(mariadbVersion) >= 11 ? 'mariadb' : 'mysql';
+const adminProg = parseFloat(mariadbVersion) >= 11 ? 'mariadb-admin' : 'mysqladmin';
+
 let bin;
 
 if (isMac()) {
@@ -88,9 +91,9 @@ if (isMac()) {
   addToPath(bin);
 
   // add user
-  run(`${bin}\\mysql`, `-u`, `root`, `-e`, `CREATE USER 'runneradmin'@'localhost' IDENTIFIED BY ''`);
-  run(`${bin}\\mysql`, `-u`, `root`, `-e`, `GRANT ALL PRIVILEGES ON *.* TO 'runneradmin'@'localhost'`);
-  run(`${bin}\\mysql`, `-u`, `root`, `-e`, `FLUSH PRIVILEGES`);
+  run(`${bin}\\${prog}`, `-u`, `root`, `-e`, `CREATE USER 'runneradmin'@'localhost' IDENTIFIED BY ''`);
+  run(`${bin}\\${prog}`, `-u`, `root`, `-e`, `GRANT ALL PRIVILEGES ON *.* TO 'runneradmin'@'localhost'`);
+  run(`${bin}\\${prog}`, `-u`, `root`, `-e`, `FLUSH PRIVILEGES`);
 } else {
   if (process.arch != 'arm64') {
     // clear previous data
@@ -108,7 +111,7 @@ if (isMac()) {
   run(`sudo`, `systemctl`, `start`, `mariadb`);
 
   // remove root password
-  run(`sudo`, `mysqladmin`, `-proot`, `password`, ``);
+  run(`sudo`, adminProg, `-proot`, `password`, ``);
 
   // add user
   const user = process.env['USER'];
@@ -116,13 +119,13 @@ if (isMac()) {
     // TODO fix
     throw `Unsupported user: ${user}`;
   }
-  run(`sudo`, `mysql`, `-e`, `CREATE USER '${user}'@'localhost' IDENTIFIED BY ''`);
-  run(`sudo`, `mysql`, `-e`, `GRANT ALL PRIVILEGES ON *.* TO '${user}'@'localhost'`);
-  run(`sudo`, `mysql`, `-e`, `FLUSH PRIVILEGES`);
+  run(`sudo`, prog, `-e`, `CREATE USER '${user}'@'localhost' IDENTIFIED BY ''`);
+  run(`sudo`, prog, `-e`, `GRANT ALL PRIVILEGES ON *.* TO '${user}'@'localhost'`);
+  run(`sudo`, prog, `-e`, `FLUSH PRIVILEGES`);
 
   bin = `/usr/bin`;
 }
 
 if (database) {
-  run(path.join(bin, 'mysqladmin'), 'create', database);
+  run(path.join(bin, adminProg), 'create', database);
 }
