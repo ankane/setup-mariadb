@@ -28,18 +28,18 @@ Specify a version
 
 Currently supports
 
-Version | `11.8` | `11.4` | `10.11` | `10.6` | `10.5`
---- | --- | --- | --- | --- | ---
-`ubuntu-24.04` | default | ✓ | ✓ | |
-`ubuntu-24.04-arm` | default | ✓ | ✓ | |
-`ubuntu-22.04` | default | ✓ | ✓ | ✓ |
-`ubuntu-22.04-arm` | default | ✓ | ✓ | ✓ |
-`macos-15` | default | ✓ | ✓ | ✓ | ✓
-`macos-14` | default | ✓ | ✓ | ✓ | ✓
-`macos-13` | default | ✓ | ✓ | ✓ | ✓
-`windows-2025` | default | ✓ | ✓ | ✓ | ✓
-`windows-2022` | default | ✓ | ✓ | ✓ | ✓
-`windows-2019` | default | ✓ | ✓ | ✓ | ✓
+Version | `11.8` | `11.4` | `10.11` | `10.6`
+--- | --- | --- | --- | ---
+`ubuntu-24.04` | default | ✓ | ✓ |
+`ubuntu-24.04-arm` | default | ✓ | ✓ |
+`ubuntu-22.04` | default | ✓ | ✓ |
+`ubuntu-22.04-arm` | default | ✓ | ✓ |
+`macos-15` | default | ✓ | ✓ | ✓
+`macos-14` | default | ✓ | ✓ | ✓
+`macos-13` | default | ✓ | ✓ | ✓
+`windows-2025` | default | ✓ | ✓ | ✓
+`windows-2022` | default | ✓ | ✓ | ✓
+`windows-2019` | default | ✓ | ✓ | ✓
 
 Test against multiple versions
 
