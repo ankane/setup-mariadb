@@ -61,11 +61,11 @@ let bin;
 if (isMac()) {
   const formula = `mariadb@${mariadbVersion}`;
   if (!formulaPresent(formula)) {
-    run(`brew`, `update`);
+    run(`brew`, `update`, `--quiet`);
   }
 
   // install
-  run(`brew`, `install`, formula);
+  run(`brew`, `install`, `--quiet`, formula);
 
   // start
   const prefix = process.arch == 'arm64' ? '/opt/homebrew' : '/usr/local';
