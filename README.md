@@ -39,7 +39,6 @@ Version | `11.8` | `11.4` | `10.11` | `10.6`
 `macos-13` | default | ✓ | ✓ | ✓
 `windows-2025` | default | ✓ | ✓ | ✓
 `windows-2022` | default | ✓ | ✓ | ✓
-`windows-2019` | default | ✓ | ✓ | ✓
 
 Test against multiple versions
 
