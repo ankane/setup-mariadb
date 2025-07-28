@@ -51,6 +51,7 @@ if (!['11.8', '11.4', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
 }
 
 const database = process.env['INPUT_DATABASE'];
+const user = isWindows() ? 'runneradmin' : (isMac() ? null : process.env['USER']);
 
 const prog = parseFloat(mariadbVersion) >= 11 ? 'mariadb' : 'mysql';
 const adminProg = parseFloat(mariadbVersion) >= 11 ? 'mariadb-admin' : 'mysqladmin';
@@ -72,6 +73,8 @@ if (isMac()) {
   run(`${bin}/mysql.server`, `start`);
 
   addToPath(bin);
+
+  cmdPrefix = [`${bin}/${prog}`];
 } else if (isWindows()) {
   // install
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
@@ -90,10 +93,7 @@ if (isMac()) {
   bin = `C:\\Program Files\\MariaDB ${mariadbVersion}\\bin`;
   addToPath(bin);
 
-  // add user
-  run(`${bin}\\${prog}`, `-u`, `root`, `-e`, `CREATE USER 'runneradmin'@'localhost' IDENTIFIED BY ''`);
-  run(`${bin}\\${prog}`, `-u`, `root`, `-e`, `GRANT ALL PRIVILEGES ON *.* TO 'runneradmin'@'localhost'`);
-  run(`${bin}\\${prog}`, `-u`, `root`, `-e`, `FLUSH PRIVILEGES`);
+  cmdPrefix = [`${bin}\\${prog}`, `-u`, `root`];
 } else {
   if (process.arch != 'arm64') {
     // clear previous data
@@ -113,17 +113,18 @@ if (isMac()) {
   // remove root password
   run(`sudo`, adminProg, `-proot`, `password`, ``);
 
-  // add user
-  const user = process.env['USER'];
-  if (user != 'runner') {
+  bin = `/usr/bin`;
+  cmdPrefix = [`sudo`, prog];
+}
+
+if (user) {
+  if (user != 'runner' && user != 'runneradmin') {
     // TODO fix
     throw `Unsupported user: ${user}`;
   }
-  run(`sudo`, prog, `-e`, `CREATE USER '${user}'@'localhost' IDENTIFIED BY ''`);
-  run(`sudo`, prog, `-e`, `GRANT ALL PRIVILEGES ON *.* TO '${user}'@'localhost'`);
-  run(`sudo`, prog, `-e`, `FLUSH PRIVILEGES`);
-
-  bin = `/usr/bin`;
+  run(...cmdPrefix, `-e`, `CREATE USER '${user}'@'localhost' IDENTIFIED BY ''`);
+  run(...cmdPrefix, `-e`, `GRANT ALL PRIVILEGES ON *.* TO '${user}'@'localhost'`);
+  run(...cmdPrefix, `-e`, `FLUSH PRIVILEGES`);
 }
 
 if (database) {
