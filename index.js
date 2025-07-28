@@ -104,8 +104,8 @@ if (isMac()) {
   // install
   run(`sudo`, `apt-key`, `adv`, `--recv-keys`, `--keyserver`, `hkp://keyserver.ubuntu.com:80`, `0xF1656F24C74CD1D8`);
   runUnsafe(`echo "deb [arch=amd64,arm64] https://dlm.mariadb.com/repo/mariadb-server/${mariadbVersion}/repo/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/mariadb.list`);
-  run(`sudo`, `apt-get`, `-q`, `update`, `-o`, `Dir::Etc::sourcelist=sources.list.d/mariadb.list`, `-o`, `Dir::Etc::sourceparts=-`, `-o`, `APT::Get::List-Cleanup=0`);
-  run(`sudo`, `apt-get`, `-q`, `install`, `mariadb-server`);
+  run(`sudo`, `apt-get`, `-qq`, `update`, `-o`, `Dir::Etc::sourcelist=sources.list.d/mariadb.list`, `-o`, `Dir::Etc::sourceparts=-`, `-o`, `APT::Get::List-Cleanup=0`);
+  run(`sudo`, `apt-get`, `-qq`, `install`, `mariadb-server`);
 
   // start
   run(`sudo`, `systemctl`, `start`, `mariadb`);
