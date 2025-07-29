@@ -85,7 +85,7 @@ if (isMac()) {
     '10.5': '10.5.29'
   };
   const fullVersion = versionMap[mariadbVersion];
-  run(`curl`, `-Ls`, `-o`, `mariadb.msi`, `https://dlm.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
+  run(`C:\\Windows\\System32\\curl.exe`, `-Ls`, `-o`, `mariadb.msi`, `https://dlm.mariadb.com/MariaDB/mariadb-${fullVersion}/winx64-packages/mariadb-${fullVersion}-winx64.msi`);
   run(`msiexec`, `/i`, `mariadb.msi`, `SERVICENAME=MariaDB`, `/qn`);
 
   bin = `C:\\Program Files\\MariaDB ${mariadbVersion}\\bin`;
