@@ -16,6 +16,13 @@ Add it as a step to your workflow
       - uses: ankane/setup-mariadb@v1
 ```
 
+The default credentials are:
+
+- user: the OS user (`runner` on Linux and Mac, `runneradmin` on Windows)
+- password: none
+- host: `localhost` or socket
+- port: `3306`
+
 ## Versions
 
 Specify a version
