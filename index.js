@@ -121,8 +121,10 @@ if (isMac()) {
 if (!userExists) {
   run(...cmdPrefix, `-e`, `CREATE USER '${user}'@'localhost' IDENTIFIED BY ''`);
 }
-run(...cmdPrefix, `-e`, `GRANT ALL PRIVILEGES ON *.* TO '${user}'@'localhost' IDENTIFIED BY ''`);
-run(...cmdPrefix, `-e`, `FLUSH PRIVILEGES`);
+if (!userExists || (isMac() && user == 'root')) {
+  run(...cmdPrefix, `-e`, `GRANT ALL PRIVILEGES ON *.* TO '${user}'@'localhost' IDENTIFIED BY ''`);
+  run(...cmdPrefix, `-e`, `FLUSH PRIVILEGES`);
+}
 
 if (database) {
   run(path.join(bin, adminProg), `-u`, user, `create`, database);
