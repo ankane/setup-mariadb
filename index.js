@@ -45,7 +45,12 @@ if (!['11.8', '11.4', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
 }
 
 const database = process.env['INPUT_DATABASE'];
-const user = isWindows() ? 'runneradmin' : (isMac() ? null : process.env['USER']);
+const defaultUser = os.userInfo().username;
+const user = process.env['INPUT_USER'] || defaultUser;
+if (!/^[a-z0-9_-]+$/i.test(user)) {
+  throw `Unsupported user: ${user}`;
+}
+const userExists = user == 'root' || (isMac() && user == defaultUser);
 
 const prog = parseFloat(mariadbVersion) >= 11 ? 'mariadb' : 'mysql';
 const adminProg = parseFloat(mariadbVersion) >= 11 ? 'mariadb-admin' : 'mysqladmin';
@@ -114,16 +119,12 @@ if (isMac()) {
   cmdPrefix = [`sudo`, prog];
 }
 
-if (user) {
-  if (user != 'runner' && user != 'runneradmin') {
-    // TODO fix
-    throw `Unsupported user: ${user}`;
-  }
+if (!userExists) {
   run(...cmdPrefix, `-e`, `CREATE USER '${user}'@'localhost' IDENTIFIED BY ''`);
-  run(...cmdPrefix, `-e`, `GRANT ALL PRIVILEGES ON *.* TO '${user}'@'localhost'`);
-  run(...cmdPrefix, `-e`, `FLUSH PRIVILEGES`);
 }
+run(...cmdPrefix, `-e`, `GRANT ALL PRIVILEGES ON *.* TO '${user}'@'localhost' IDENTIFIED BY ''`);
+run(...cmdPrefix, `-e`, `FLUSH PRIVILEGES`);
 
 if (database) {
-  run(path.join(bin, adminProg), 'create', database);
+  run(path.join(bin, adminProg), `-u`, user, `create`, database);
 }

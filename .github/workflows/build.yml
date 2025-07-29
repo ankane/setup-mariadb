@@ -89,10 +89,11 @@ jobs:
         with:
           mariadb-version: ${{ matrix.mariadb-version }}
           database: testdb
+          user: ${{ matrix.mariadb-version == 11.4 && 'root' || '' }}
       - run: mysql --version
-      - run: mysql -e 'SELECT VERSION()'
-      - run: mysql -e 'SELECT CURRENT_USER()'
-      - run: mysql -e 'SELECT DATABASE()'
-      - run: mysql -e "SHOW VARIABLES LIKE 'socket'"
-      - run: mysqladmin create testdb2
-      - run: mysql -D testdb -e 'SELECT DATABASE()'
+      - run: mysql ${{ matrix.mariadb-version == 11.4 && '-u root' || '' }} -e 'SELECT VERSION()'
+      - run: mysql ${{ matrix.mariadb-version == 11.4 && '-u root' || '' }} -e 'SELECT CURRENT_USER()'
+      - run: mysql ${{ matrix.mariadb-version == 11.4 && '-u root' || '' }} -e 'SELECT DATABASE()'
+      - run: mysql ${{ matrix.mariadb-version == 11.4 && '-u root' || '' }} -e "SHOW VARIABLES LIKE 'socket'"
+      - run: mysqladmin ${{ matrix.mariadb-version == 11.4 && '-u root' || '' }} create testdb2
+      - run: mysql ${{ matrix.mariadb-version == 11.4 && '-u root' || '' }} -D testdb -e 'SELECT DATABASE()'
