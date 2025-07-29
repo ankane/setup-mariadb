@@ -91,9 +91,9 @@ jobs:
           database: testdb
           user: ${{ matrix.mariadb-version == 11.4 && 'testuser' || '' }}
       - run: mysql --version
-      - run: mysql ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }} -e 'SELECT VERSION()'
-      - run: mysql ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }} -e 'SELECT CURRENT_USER()'
-      - run: mysql ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }} -e 'SELECT DATABASE()'
-      - run: mysql ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }} -e "SHOW VARIABLES LIKE 'socket'"
-      - run: mysqladmin ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }} create testdb2
-      - run: mysql ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }} -D testdb -e 'SELECT DATABASE()'
+      - run: mysql -e 'SELECT VERSION()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - run: mysql -e 'SELECT CURRENT_USER()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - run: mysql -e 'SELECT DATABASE()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - run: mysql -e "SHOW VARIABLES LIKE 'socket'" ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - run: mysqladmin create testdb2 ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - run: mysql -D testdb -e 'SELECT DATABASE()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
