@@ -103,7 +103,7 @@ if (isMac()) {
   run(`sudo`, `mkdir`, `-p`, `/etc/apt/trusted.gpg.d`);
   run(`sudo`, `curl`, `-s`, `-o`, `/etc/apt/trusted.gpg.d/mariadb-keyring-2019.gpg`, `https://supplychain.mariadb.com/mariadb-keyring-2019.gpg`);
   const codename =  spawnSync(`lsb_release`, [`-cs`], {encoding: 'utf-8'}).stdout.trim();
-  const mariadbList = `deb [arch=amd64,arm64] https://dlm.mariadb.com/repo/mariadb-server/${mariadbVersion}/repo/ubuntu ${codename} main\n`;
+  const mariadbList = `deb [arch=amd64,arm64] https://mirror.netcologne.de/mariadb/repo/${mariadbVersion}/ubuntu ${codename} main\n`;
   spawnSync(`sudo`, [`tee`, `/etc/apt/sources.list.d/mariadb.list`], {input: mariadbList});
   run(`sudo`, `apt-get`, `-qq`, `update`, `-o`, `Dir::Etc::sourcelist=sources.list.d/mariadb.list`, `-o`, `Dir::Etc::sourceparts=-`, `-o`, `APT::Get::List-Cleanup=0`);
   run(`sudo`, `apt-get`, `-qq`, `-o`, `Dpkg::Use-Pty=0`, `install`, `mariadb-server`);
