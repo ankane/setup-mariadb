@@ -39,6 +39,15 @@ jobs:
           - os: ubuntu-22.04-arm
             mariadb-version: 10.6
 
+          - os: macos-26
+            mariadb-version: 11.8
+          - os: macos-26
+            mariadb-version: 11.4
+          - os: macos-26
+            mariadb-version: 10.11
+          - os: macos-26
+            mariadb-version: 10.6
+
           - os: macos-15
             mariadb-version: 11.8
           - os: macos-15
