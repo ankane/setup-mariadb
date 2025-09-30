@@ -106,7 +106,10 @@ if (isMac()) {
   const mariadbList = `deb [arch=amd64,arm64] https://dlm.mariadb.com/repo/mariadb-server/${mariadbVersion}/repo/ubuntu ${codename} main\n`;
   spawnSync(`sudo`, [`tee`, `/etc/apt/sources.list.d/mariadb.list`], {input: mariadbList});
   run(`sudo`, `apt-get`, `-qq`, `update`);
+  // skip man-db triggers for performance
+  run(`sudo`, `mv`, `/var/lib/man-db/auto-update`, `/var/lib/man-db/auto-update.bak`);
   run(`sudo`, `apt-get`, `-qq`, `-o`, `Dpkg::Use-Pty=0`, `install`, `mariadb-server`);
+  run(`sudo`, `mv`, `/var/lib/man-db/auto-update.bak`, `/var/lib/man-db/auto-update`);
 
   // start
   run(`sudo`, `systemctl`, `start`, `mariadb`);
