@@ -93,7 +93,7 @@ if (isMac()) {
 
   cmdPrefix = [`${bin}\\${prog}`, `-u`, `root`];
 } else {
-  if (process.arch != 'arm64') {
+  if (process.arch != 'arm64' || process.env['ImageOS'] == 'ubuntu26-arm64') {
     // clear previous data
     run(`sudo`, `systemctl`, `stop`, `mysql.service`);
     run(`sudo`, `rm`, `-rf`, `/var/lib/mysql`);
