@@ -8,12 +8,18 @@ jobs:
       matrix:
         include:
           - os: ubuntu-26.04
+            mariadb-version: 12.3
+          - os: ubuntu-26.04
             mariadb-version: 11.8
 
+          - os: ubuntu-26.04-arm
+            mariadb-version: 12.3
           - os: ubuntu-26.04-arm
             mariadb-version: 11.8
 
           - os: ubuntu-24.04
+            mariadb-version: 12.3
+          - os: ubuntu-24.04
             mariadb-version: 11.8
           - os: ubuntu-24.04
             mariadb-version: 11.4
@@ -21,6 +27,8 @@ jobs:
             mariadb-version: 10.11
 
           - os: ubuntu-24.04-arm
+            mariadb-version: 12.3
+          - os: ubuntu-24.04-arm
             mariadb-version: 11.8
           - os: ubuntu-24.04-arm
             mariadb-version: 11.4
@@ -28,6 +36,8 @@ jobs:
             mariadb-version: 10.11
 
           - os: ubuntu-22.04
+            mariadb-version: 12.3
+          - os: ubuntu-22.04
             mariadb-version: 11.8
           - os: ubuntu-22.04
             mariadb-version: 11.4
@@ -37,6 +47,8 @@ jobs:
             mariadb-version: 10.6
 
           - os: ubuntu-22.04-arm
+            mariadb-version: 12.3
+          - os: ubuntu-22.04-arm
             mariadb-version: 11.8
           - os: ubuntu-22.04-arm
             mariadb-version: 11.4
@@ -46,6 +58,8 @@ jobs:
             mariadb-version: 10.6
 
           - os: macos-26
+            mariadb-version: 12.3
+          - os: macos-26
             mariadb-version: 11.8
           - os: macos-26
             mariadb-version: 11.4
@@ -55,6 +69,8 @@ jobs:
             mariadb-version: 10.6
 
           - os: macos-15
+            mariadb-version: 12.3
+          - os: macos-15
             mariadb-version: 11.8
           - os: macos-15
             mariadb-version: 11.4
@@ -64,6 +80,8 @@ jobs:
             mariadb-version: 10.6
 
           - os: macos-15-intel
+            mariadb-version: 12.3
+          - os: macos-15-intel
             mariadb-version: 11.8
           - os: macos-15-intel
             mariadb-version: 11.4
@@ -73,6 +91,8 @@ jobs:
             mariadb-version: 10.6
 
           - os: macos-14
+            mariadb-version: 12.3
+          - os: macos-14
             mariadb-version: 11.8
           - os: macos-14
             mariadb-version: 11.4
@@ -82,6 +102,8 @@ jobs:
             mariadb-version: 10.6
 
           - os: windows-2025
+            mariadb-version: 12.3
+          - os: windows-2025
             mariadb-version: 11.8
           - os: windows-2025
             mariadb-version: 11.4
@@ -90,6 +112,8 @@ jobs:
           - os: windows-2025
             mariadb-version: 10.6
 
+          - os: windows-2022
+            mariadb-version: 12.3
           - os: windows-2022
             mariadb-version: 11.8
           - os: windows-2022

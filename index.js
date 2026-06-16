@@ -39,7 +39,7 @@ const defaultVersion = '11.8';
 const mariadbVersion = process.env['INPUT_MARIADB-VERSION'] || defaultVersion;
 
 // only LTS releases
-if (!['11.8', '11.4', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
+if (!['12.3', '11.8', '11.4', '10.11', '10.6', '10.5'].includes(mariadbVersion)) {
   throw 'Invalid MariaDB version: ' + mariadbVersion;
 }
 
@@ -78,6 +78,7 @@ if (isMac()) {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mariadb-'));
   process.chdir(tmpDir);
   const versionMap = {
+    '12.3': '12.3.2',
     '11.8': '11.8.2',
     '11.4': '11.4.7',
     '10.11': '10.11.13',
