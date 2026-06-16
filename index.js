@@ -35,7 +35,7 @@ function formulaPresent(formula) {
   return fs.existsSync(`${tap}/Formula/${formula[0]}/${formula}.rb`) || fs.existsSync(`${tap}/Aliases/${formula}`);
 }
 
-const defaultVersion = '11.8';
+const defaultVersion = '12.3';
 const mariadbVersion = process.env['INPUT_MARIADB-VERSION'] || defaultVersion;
 
 // only LTS releases

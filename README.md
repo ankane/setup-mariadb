@@ -37,18 +37,18 @@ Currently supports
 
 Version | `12.3` | `11.8` | `11.4` | `10.11` | `10.6`
 --- | --- | --- | --- | --- | ---
-`ubuntu-26.04` | ✓ | default | | |
-`ubuntu-26.04-arm` | ✓ | default | | |
-`ubuntu-24.04` | ✓ | default | ✓ | ✓ |
-`ubuntu-24.04-arm` | ✓ | default | ✓ | ✓ |
-`ubuntu-22.04` | ✓ | default | ✓ | ✓ |
-`ubuntu-22.04-arm` | ✓ | default | ✓ | ✓ |
-`macos-26` | ✓ | default | ✓ | ✓ | ✓
-`macos-15` | ✓ | default | ✓ | ✓ | ✓
-`macos-15-intel` | ✓ | default | ✓ | ✓ | ✓
-`macos-14` | ✓ | default | ✓ | ✓ | ✓
-`windows-2025` | ✓ | default | ✓ | ✓ | ✓
-`windows-2022` | ✓ | default | ✓ | ✓ | ✓
+`ubuntu-26.04` | default | ✓ | | |
+`ubuntu-26.04-arm` | default | ✓ | | |
+`ubuntu-24.04` | default | ✓ | ✓ | ✓ |
+`ubuntu-24.04-arm` | default | ✓ | ✓ | ✓ |
+`ubuntu-22.04` | default | ✓ | ✓ | ✓ |
+`ubuntu-22.04-arm` | default | ✓ | ✓ | ✓ |
+`macos-26` | default | ✓ | ✓ | ✓ | ✓
+`macos-15` | default | ✓ | ✓ | ✓ | ✓
+`macos-15-intel` | default | ✓ | ✓ | ✓ | ✓
+`macos-14` | default | ✓ | ✓ | ✓ | ✓
+`windows-2025` | default | ✓ | ✓ | ✓ | ✓
+`windows-2022` | default | ✓ | ✓ | ✓ | ✓
 
 Test against multiple versions
 
