@@ -43,8 +43,6 @@ jobs:
             mariadb-version: 11.4
           - os: ubuntu-22.04
             mariadb-version: 10.11
-          - os: ubuntu-22.04
-            mariadb-version: 10.6
 
           - os: ubuntu-22.04-arm
             mariadb-version: 12.3
@@ -54,8 +52,6 @@ jobs:
             mariadb-version: 11.4
           - os: ubuntu-22.04-arm
             mariadb-version: 10.11
-          - os: ubuntu-22.04-arm
-            mariadb-version: 10.6
 
           - os: macos-26
             mariadb-version: 12.3
@@ -65,8 +61,6 @@ jobs:
             mariadb-version: 11.4
           - os: macos-26
             mariadb-version: 10.11
-          - os: macos-26
-            mariadb-version: 10.6
 
           - os: macos-15
             mariadb-version: 12.3
@@ -76,8 +70,6 @@ jobs:
             mariadb-version: 11.4
           - os: macos-15
             mariadb-version: 10.11
-          - os: macos-15
-            mariadb-version: 10.6
 
           - os: macos-15-intel
             mariadb-version: 12.3
@@ -87,8 +79,6 @@ jobs:
             mariadb-version: 11.4
           - os: macos-15-intel
             mariadb-version: 10.11
-          - os: macos-15-intel
-            mariadb-version: 10.6
 
           - os: macos-14
             mariadb-version: 12.3
@@ -98,8 +88,6 @@ jobs:
             mariadb-version: 11.4
           - os: macos-14
             mariadb-version: 10.11
-          - os: macos-14
-            mariadb-version: 10.6
 
           - os: windows-2025
             mariadb-version: 12.3
@@ -109,8 +97,6 @@ jobs:
             mariadb-version: 11.4
           - os: windows-2025
             mariadb-version: 10.11
-          - os: windows-2025
-            mariadb-version: 10.6
 
           - os: windows-2022
             mariadb-version: 12.3
@@ -120,8 +106,6 @@ jobs:
             mariadb-version: 11.4
           - os: windows-2022
             mariadb-version: 10.11
-          - os: windows-2022
-            mariadb-version: 10.6
     steps:
       - uses: actions/checkout@v5
       - uses: ./.
