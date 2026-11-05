@@ -46,7 +46,6 @@ Version | `12.3` | `11.8` | `11.4` | `10.11`
 `macos-26` | default | ✓ | ✓ | ✓
 `macos-15` | default | ✓ | ✓ | ✓
 `macos-15-intel` | default | ✓ | ✓ | ✓
-`macos-14` | default | ✓ | ✓ | ✓
 `windows-2025` | default | ✓ | ✓ | ✓
 `windows-2022` | default | ✓ | ✓ | ✓
 
