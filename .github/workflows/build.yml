@@ -111,3 +111,5 @@ jobs:
       - run: mariadb -e "SHOW VARIABLES LIKE 'socket'" ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
       - run: mariadbadmin create testdb2 ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
       - run: mariadb -D testdb -e 'SELECT DATABASE()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
+        run: mariadb-tzinfo-to-sql /usr/share/zoneinfo | mariadb -u root mysql
