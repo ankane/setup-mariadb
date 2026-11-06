@@ -98,16 +98,16 @@ jobs:
           - os: windows-2022
             mariadb-version: 10.11
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: ./.
         with:
           mariadb-version: ${{ matrix.mariadb-version }}
           database: testdb
           user: ${{ matrix.mariadb-version == 11.4 && 'testuser' || '' }}
-      - run: mysql --version
-      - run: mysql -e 'SELECT VERSION()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
-      - run: mysql -e 'SELECT CURRENT_USER()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
-      - run: mysql -e 'SELECT DATABASE()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
-      - run: mysql -e "SHOW VARIABLES LIKE 'socket'" ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
-      - run: mysqladmin create testdb2 ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
-      - run: mysql -D testdb -e 'SELECT DATABASE()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - run: mariadb --version
+      - run: mariadb -e 'SELECT VERSION()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - run: mariadb -e 'SELECT CURRENT_USER()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - run: mariadb -e 'SELECT DATABASE()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - run: mariadb -e "SHOW VARIABLES LIKE 'socket'" ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - run: mariadbadmin create testdb2 ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
+      - run: mariadb -D testdb -e 'SELECT DATABASE()' ${{ matrix.mariadb-version == 11.4 && '-u testuser' || '' }}
