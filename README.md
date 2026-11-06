@@ -84,7 +84,13 @@ Specify a user
 Run queries
 
 ```yml
-      - run: mysql -D testdb -e 'SELECT VERSION()'
+      - run: mariadb -D testdb -e 'SELECT VERSION()'
+```
+
+Install [time zone support](https://mariadb.com/docs/server/reference/data-types/string-data-types/character-sets/internationalization-and-localization/time-zones)
+
+```yml
+      - run: mariadb-tzinfo-to-sql /usr/share/zoneinfo | mariadb -u root mysql
 ```
 
 ## Related Actions
